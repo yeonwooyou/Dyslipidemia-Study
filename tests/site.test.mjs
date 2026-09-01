@@ -150,6 +150,22 @@ test("deep learning library adds categorized PM study content", async () => {
   assert.equal(library.searchLibrary("EROICA").some((item) => /EROICA/.test(item.title + item.summary)), true);
 });
 
+test("netlify deployment builds a public static dist with security headers", async () => {
+  const packageJson = JSON.parse(await readText("../package.json"));
+  const config = await readText("../netlify.toml");
+
+  assert.equal(packageJson.scripts.build, "rm -rf dist && mkdir -p dist/assets && cp index.html *.css *.js dist/ && cp assets/lipid-pathway.svg dist/assets/");
+  assert.match(config, /\[build\]/);
+  assert.match(config, /command = "npm test && npm run build"/);
+  assert.match(config, /publish = "dist"/);
+  assert.match(config, /Content-Security-Policy/);
+  assert.match(config, /Strict-Transport-Security/);
+  assert.match(config, /X-Content-Type-Options = "nosniff"/);
+  assert.match(config, /X-Frame-Options = "DENY"/);
+  assert.match(config, /Referrer-Policy/);
+  assert.match(config, /Permissions-Policy/);
+});
+
 test("guideline data distinguishes current and upcoming Korean guidance", async () => {
   const { getGuidelineById, guidelineSummaries } = await loadStudyData();
   const ksola = getGuidelineById("ksola-2022");

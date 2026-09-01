@@ -23,3 +23,12 @@
 디자인은 외부 font 의존 없이 `theme-refresh.css`에서 local/system sans stack으로 바꿨다. 기존 serif-heavy headline 대신 `Avenir Next`, `Pretendard`, `Apple SD Gothic Neo`, `Noto Sans KR` 순서로 읽히게 했다.
 
 가시성 개선은 `layout-refresh.css`와 `pages.css`에서 관리한다. 상단 navigation은 6개 페이지 탭으로 줄였고, 모바일에서는 메뉴 버튼으로 접힌다. 각 섹션은 `data-page`로 배정되어 선택한 페이지의 내용만 표시된다.
+
+## Netlify 배포
+
+Netlify는 [netlify.toml](netlify.toml)의 설정을 사용한다.
+
+- Build command: `npm test && npm run build`
+- Publish directory: `dist`
+- `dist`에는 사이트 실행에 필요한 HTML/CSS/JS/SVG만 복사한다.
+- 보안 헤더는 `netlify.toml`의 `[[headers]]`에서 CSP, HSTS, `nosniff`, frame deny, referrer policy, permissions policy로 지정한다.
