@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'; upgrade-insecure-requests"
+    >
+    <meta name="description" content="로수젯 PM을 위한 이상지질혈증, 지침, ATC, 임상근거 학습 사이트">
+    <title>Rosuzet PM Study Console</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="features.css">
+    <link rel="stylesheet" href="strategy.css">
+    <link rel="stylesheet" href="theme-refresh.css">
+    <link rel="stylesheet" href="layout-refresh.css">
+    <link rel="stylesheet" href="pages.css">
+    <script src="evidence-data.js" defer></script>
+    <script src="statin-evidence-data.js" defer></script>
+    <script src="library-data.js" defer></script>
+    <script src="strategy-data.js" defer></script>
+    <script src="site-data.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="strategy-tools.js" defer></script>
+    <script src="page-router.js" defer></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <a class="brand" href="#home" aria-label="Rosuzet PM Study Console home">
+        <span class="brand-mark" aria-hidden="true">RZ</span>
+        <span>
+          <strong>Rosuzet PM Study Console</strong>
+          <small>작성 기준 2026-08-31</small>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="pageNav">
+        메뉴
+      </button>
+      <nav class="page-nav" id="pageNav" aria-label="학습 페이지">
+        <a href="#home" data-page-link="home">Home</a>
+        <a href="#foundation" data-page-link="foundation">Foundation</a>
+        <a href="#strategy" data-page-link="strategy">Strategy</a>
+        <a href="#evidence" data-page-link="evidence">Evidence</a>
+        <a href="#execution" data-page-link="execution">Execution</a>
+        <a href="#library" data-page-link="library">Library</a>
+      </nav>
+      <div class="page-status" aria-live="polite">
+        <span>현재 페이지</span>
+        <strong id="activePageTitle">Home</strong>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview" class="section section-intro" data-category="foundation" data-page="home" aria-labelledby="overview-title">
+        <div class="intro-copy">
+          <p class="eyebrow">로수젯 / Rosuzet</p>
+          <h1 id="overview-title">이상지질혈증 PM 학습 콘솔</h1>
+          <p class="lead">
+            질환 목표, 국내외 지침, 로수젯 제품 프로파일, WHO ATC와 EPHMRA 시장분류,
+            핵심 임상근거를 한 화면 흐름으로 연결한다.
+          </p>
+          <div class="intro-actions" aria-label="핵심 학습 이동">
+            <a class="primary-action" href="#foundation">지침 비교</a>
+            <a class="secondary-action" href="#library">심화 라이브러리</a>
+          </div>
+        </div>
+        <figure class="pathway-figure">
+          <img src="assets/lipid-pathway.svg" width="920" height="560" alt="간 콜레스테롤 합성 억제와 장 콜레스테롤 흡수 억제를 함께 보여주는 로수젯 이중 작용 도식">
+          <figcaption>Rosuvastatin + Ezetimibe dual inhibition</figcaption>
+        </figure>
+      </section>
+
+      <section class="dashboard-strip" data-page="home" aria-label="핵심 요약">
+        <article>
+          <span>WHO ATC</span>
+          <strong>C10BA06</strong>
+          <p>rosuvastatin and ezetimibe</p>
+        </article>
+        <article>
+          <span>Market Class</span>
+          <strong>C10C</strong>
+          <p>EPHMRA/Intellus 조합 지질조절제</p>
+        </article>
+        <article>
+          <span>KSoLA</span>
+          <strong>2022 제5판</strong>
+          <p>2023-05-22 수정본, 2026년판 준비 공지</p>
+        </article>
+        <article>
+          <span>Core Trial</span>
+          <strong>RACING</strong>
+          <p>ASCVD 3년 outcome strategy</p>
+        </article>
+      </section>
+
+      <section id="category-map" class="section category-map-section" data-page="home" aria-labelledby="category-map-title">
+        <div class="category-map-header">
+          <p class="eyebrow">Workbench Map</p>
+          <h2 id="category-map-title">학습 구조</h2>
+        </div>
+        <nav class="category-map-grid" aria-label="카테고리별 이동">
+          <a class="category-tile category-foundation" href="#foundation">
+            <span>Foundation</span>
+            <strong>질환 · 지침 · 제품</strong>
+            <small>Guidelines · Targets · Rosuzet · ATC</small>
+          </a>
+          <a class="category-tile category-strategy" href="#strategy">
+            <span>Strategy</span>
+            <strong>세그먼트 · 시장 · 경쟁</strong>
+            <small>Playbook · Simulator · War Room · Market</small>
+          </a>
+          <a class="category-tile category-evidence" href="#evidence">
+            <span>Evidence</span>
+            <strong>논문 · 근거 등급 · Atlas</strong>
+            <small>Ladder · PICO · Direct · Grading · Atlas</small>
+          </a>
+          <a class="category-tile category-execution" href="#execution">
+            <span>Execution</span>
+            <strong>Claim · 반론 · 업데이트</strong>
+            <small>Checker · Training · Tracker · Brief</small>
+          </a>
+          <a class="category-tile category-library" href="#library">
+            <span>Library</span>
+            <strong>심화 학습 모듈</strong>
+            <small>Biomarkers · Safety · Market · Field · Glossary</small>
+          </a>
+        </nav>
+      </section>
+
+      <section id="segment-playbook" class="section" data-category="strategy" data-page="strategy" aria-labelledby="segment-playbook-title">
+        <div class="section-heading">
+          <p class="eyebrow">Segment Playbook</p>
+          <h2 id="segment-playbook-title">진료과별 실행 플레이북</h2>
+          <p>Cardiology, Endocrinology, Neurology, Nephrology, Primary care를 서로 다른 환자·근거·가드레일로 분리한다.</p>
+        </div>
+        <div id="segmentPlaybookGrid" class="strategy-card-grid"></div>
+      </section>
+
+      <section id="guidelines" class="section" data-category="foundation" data-page="foundation" aria-labelledby="guidelines-title">
+        <div class="section-heading">
+          <p class="eyebrow">KSoLA · ESC/EAS · ACC/AHA · ADA</p>
+          <h2 id="guidelines-title">지침 비교 학습</h2>
+          <p>국내 실무는 KSoLA를 중심에 두고, ESC/EAS와 ACC/AHA는 글로벌 메시지와 evidence framing을 보강하는 축으로 읽는다.</p>
+        </div>
+        <div class="guideline-layout">
+          <div id="guidelineTabs" class="segmented-control" role="tablist" aria-label="지침 선택"></div>
+          <article id="guidelinePanel" class="detail-panel" aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section id="targets" class="section" data-category="foundation" data-page="foundation" aria-labelledby="targets-title">
+        <div class="section-heading">
+          <p class="eyebrow">Target Matrix</p>
+          <h2 id="targets-title">지침별 LDL-C Target 비교표</h2>
+          <p>KSoLA를 국내 실행 기준으로 두고, ESC/EAS와 ACC/AHA의 target language를 나란히 본다.</p>
+        </div>
+        <div class="table-shell">
+          <table id="targetMatrix"></table>
+        </div>
+      </section>
+
+      <section id="calculator" class="section section-split" data-category="foundation" data-page="foundation" aria-labelledby="calculator-title">
+        <div class="section-heading">
+          <p class="eyebrow">Target Pressure</p>
+          <h2 id="calculator-title">LDL-C Gap 계산기</h2>
+          <p>baseline LDL-C와 위험군 목표를 넣어 목표 도달에 필요한 감소폭을 계산한다.</p>
+        </div>
+        <form class="calculator" aria-label="LDL-C gap calculator">
+          <label>
+            Baseline LDL-C
+            <input id="baselineLdl" type="number" min="30" max="300" step="1" value="120">
+          </label>
+          <label>
+            Risk target
+            <select id="targetSelect"></select>
+          </label>
+          <output id="ldlResult" class="ldl-result" aria-live="polite"></output>
+        </form>
+      </section>
+
+      <section id="strategy-simulator" class="section" data-category="strategy" data-page="strategy" aria-labelledby="strategy-simulator-title">
+        <div class="section-heading">
+          <p class="eyebrow">Strategy Simulator</p>
+          <h2 id="strategy-simulator-title">LDL-C Lowering 전략 시뮬레이터</h2>
+          <p>baseline, target, 현재 치료를 기준으로 statin 증량, 로수젯 용량, injectable add-on의 예상 위치를 비교한다.</p>
+        </div>
+        <div id="strategySimulatorRoot" class="strategy-tool-shell"></div>
+      </section>
+
+      <section id="cases" class="section section-split" data-category="foundation" data-page="foundation" aria-labelledby="cases-title">
+        <div class="section-heading">
+          <p class="eyebrow">Patient Archetypes</p>
+          <h2 id="cases-title">환자 케이스 시뮬레이터</h2>
+          <p>위험군, baseline LDL-C, 현재 치료를 조합해 PM 학습 관점을 만든다.</p>
+        </div>
+        <form class="case-simulator" aria-label="환자 케이스 시뮬레이터">
+          <label>
+            Archetype
+            <select id="caseArchetype"></select>
+          </label>
+          <label>
+            Baseline LDL-C
+            <input id="caseBaseline" type="number" min="30" max="300" step="1" value="132">
+          </label>
+          <label>
+            Current therapy
+            <select id="caseTherapy"></select>
+          </label>
+          <output id="caseResult" class="case-result" aria-live="polite"></output>
+        </form>
+      </section>
+
+      <section id="rosuzet" class="section" data-category="foundation" data-page="foundation" aria-labelledby="rosuzet-title">
+        <div class="section-heading">
+          <p class="eyebrow">Product Core</p>
+          <h2 id="rosuzet-title">로수젯 제품 학습</h2>
+          <p>허가사항 안에서 성분, 용량, 기전, 안전성 주의, 세그먼트별 활용 질문을 정리한다.</p>
+        </div>
+        <div id="rosuzetPanel" class="product-grid"></div>
+      </section>
+
+      <section id="dose-map" class="section" data-category="foundation" data-page="foundation" aria-labelledby="dose-map-title">
+        <div class="section-heading">
+          <p class="eyebrow">Dose Positioning</p>
+          <h2 id="dose-map-title">로수젯 용량별 포지셔닝 맵</h2>
+          <p>용량은 숫자가 아니라 환자 세그먼트, LDL-C gap, 근거, claim guardrail의 조합으로 학습한다.</p>
+        </div>
+        <div id="doseGrid" class="dose-grid"></div>
+      </section>
+
+      <section id="atc" class="section" data-category="foundation" data-page="foundation" aria-labelledby="atc-title">
+        <div class="section-heading">
+          <p class="eyebrow">Classification</p>
+          <h2 id="atc-title">ATC C10 / C10C Explorer</h2>
+          <p>WHO ATC와 EPHMRA/Intellus 시장분류를 분리해서 학습한다.</p>
+        </div>
+        <div id="atcGrid" class="atc-grid"></div>
+      </section>
+
+      <section id="competitors" class="section" data-category="strategy" data-page="strategy" aria-labelledby="competitors-title">
+        <div class="section-heading">
+          <p class="eyebrow">Market Map</p>
+          <h2 id="competitors-title">경쟁품 맵</h2>
+          <p>동일성분, statin+ezetimibe class, injectable/nonstatin, TG 중심 치료제를 다른 질문으로 분리한다.</p>
+        </div>
+        <div id="competitorGrid" class="competitor-grid"></div>
+      </section>
+
+      <section id="war-room" class="section" data-category="strategy" data-page="strategy" aria-labelledby="war-room-title">
+        <div class="section-heading">
+          <p class="eyebrow">Competitor War Room</p>
+          <h2 id="war-room-title">경쟁 대응 War Room</h2>
+          <p>동일성분 FDC, 다른 statin+ezetimibe, 주사제, bempedoic acid, TG 치료제를 threat와 response로 나눠 본다.</p>
+        </div>
+        <div id="warRoomGrid" class="war-room-grid"></div>
+      </section>
+
+      <section id="guideline-diff" class="section" data-category="strategy" data-page="strategy" aria-labelledby="guideline-diff-title">
+        <div class="section-heading">
+          <p class="eyebrow">Guideline Diff Engine</p>
+          <h2 id="guideline-diff-title">지침 변경점 Diff</h2>
+          <p>KSoLA, ESC/EAS, ACC/AHA 문장을 PM 메시지 영향 기준으로 비교한다.</p>
+        </div>
+        <div class="table-shell">
+          <table id="guidelineDiffTable"></table>
+        </div>
+      </section>
+
+      <section id="evidence" class="section" data-category="evidence" data-page="evidence" aria-labelledby="evidence-title">
+        <div class="section-heading">
+          <p class="eyebrow">Evidence Ladder</p>
+          <h2 id="evidence-title">핵심 근거 카드</h2>
+          <p>근거는 mechanism, lipid efficacy, outcome, real-world 순서로 계층화한다.</p>
+        </div>
+        <div id="evidenceGrid" class="evidence-grid"></div>
+      </section>
+
+      <section id="pico" class="section" data-category="evidence" data-page="evidence" aria-labelledby="pico-title">
+        <div class="section-heading">
+          <p class="eyebrow">PICO Drill</p>
+          <h2 id="pico-title">Evidence PICO 카드</h2>
+          <p>논문을 field message로 바꾸기 전 PICO, limitation, PM message를 분리한다.</p>
+        </div>
+        <div id="picoGrid" class="pico-grid"></div>
+      </section>
+
+      <section id="direct-studies" class="section" data-category="evidence" data-page="evidence" aria-labelledby="direct-studies-title">
+        <div class="section-heading">
+          <p class="eyebrow">Direct Evidence Deep Dive</p>
+          <h2 id="direct-studies-title">로수젯 직접·인접 연구 상세</h2>
+          <p>EROICA, REMBRANDT, SWITCH, ROSETTA-Stroke, RACING subgroup처럼 제품/전략 메시지에 가까운 연구를 claim guardrail과 함께 본다.</p>
+        </div>
+        <div id="directStudyGrid" class="direct-study-grid"></div>
+      </section>
+
+      <section id="evidence-grading" class="section" data-category="evidence" data-page="evidence" aria-labelledby="evidence-grading-title">
+        <div class="section-heading">
+          <p class="eyebrow">Evidence Quality Grading</p>
+          <h2 id="evidence-grading-title">근거 품질·Claim 가능성 점수</h2>
+          <p>브랜드 직접성, 연구 디자인, outcome 여부, 한국/아시아 관련성, limitation을 점수화한다.</p>
+        </div>
+        <div id="evidenceQualityGrid" class="quality-grid"></div>
+      </section>
+
+      <section id="evidence-atlas" class="section" data-category="evidence" data-page="evidence" aria-labelledby="evidence-atlas-title">
+        <div class="section-heading">
+          <p class="eyebrow">Evidence Atlas</p>
+          <h2 id="evidence-atlas-title">이상지질혈증 근거 전체 지도</h2>
+          <p>로수젯 직접 연구, rosuvastatin+ezetimibe 전략, statin primary/secondary prevention, intensive strategy, safety, PCSK9, bempedoic acid, TG residual risk, 국내 역학을 한 번에 검색한다.</p>
+        </div>
+        <form class="atlas-controls" aria-label="Evidence atlas filter">
+          <label>
+            Category
+            <select id="atlasCategory"></select>
+          </label>
+          <label>
+            Search
+            <input id="atlasSearch" type="search" placeholder="EROICA, diabetes, stroke, PCSK9">
+          </label>
+          <output id="atlasCount" aria-live="polite"></output>
+        </form>
+        <div id="evidenceAtlasGrid" class="evidence-atlas-grid"></div>
+      </section>
+
+      <section id="claims" class="section" data-category="execution" data-page="execution" aria-labelledby="claims-title">
+        <div class="section-heading">
+          <p class="eyebrow">Claim Guardrail</p>
+          <h2 id="claims-title">표현 가드레일</h2>
+          <p>말해도 되는 표현, 신중한 표현, 피해야 할 표현을 구분해 교육자료 리스크를 줄인다.</p>
+        </div>
+        <div id="claimColumns" class="claim-columns"></div>
+      </section>
+
+      <section id="claim-checker" class="section" data-category="execution" data-page="execution" aria-labelledby="claim-checker-title">
+        <div class="section-heading">
+          <p class="eyebrow">Claim Builder</p>
+          <h2 id="claim-checker-title">Claim Checker</h2>
+          <p>초안 문장을 입력하면 allowed, cautious, avoid 기준으로 판정하고 더 안전한 표현 방향을 제시한다.</p>
+        </div>
+        <div id="claimCheckerRoot" class="strategy-tool-shell"></div>
+      </section>
+
+      <section id="objections" class="section" data-category="execution" data-page="execution" aria-labelledby="objections-title">
+        <div class="section-heading">
+          <p class="eyebrow">Field Response</p>
+          <h2 id="objections-title">Objection Handling Bank</h2>
+          <p>현장에서 자주 나오는 질문을 근거, 답변 구조, 금지 claim으로 나눠 훈련한다.</p>
+        </div>
+        <div id="objectionList" class="objection-list"></div>
+      </section>
+
+      <section id="objection-training" class="section" data-category="execution" data-page="execution" aria-labelledby="objection-training-title">
+        <div class="section-heading">
+          <p class="eyebrow">Objection Training</p>
+          <h2 id="objection-training-title">반론 대응 훈련 모드</h2>
+          <p>고강도 statin, 제네릭, TG, PCSK9, EROICA outcome claim 같은 질문을 짧은 카드로 반복 훈련한다.</p>
+        </div>
+        <div id="objectionTrainingRoot" class="training-shell"></div>
+      </section>
+
+      <section id="market-sizing" class="section" data-category="strategy" data-page="strategy" aria-labelledby="market-sizing-title">
+        <div class="section-heading">
+          <p class="eyebrow">Market Sizing</p>
+          <h2 id="market-sizing-title">TAM / SAM / SOM 계산기</h2>
+          <p>국내 이상지질혈증 pool에서 진단, 치료, statin 단독 목표 미달, 로수젯 목표 share를 단계별로 추정한다.</p>
+        </div>
+        <div id="marketSizingRoot" class="strategy-tool-shell"></div>
+      </section>
+
+      <section id="publication-tracker" class="section" data-category="execution" data-page="execution" aria-labelledby="publication-tracker-title">
+        <div class="section-heading">
+          <p class="eyebrow">Publication Tracker</p>
+          <h2 id="publication-tracker-title">Publication / Asset Tracker</h2>
+          <p>EROICA, REMBRANDT, EASY-ROSUZET, SWITCH, KSoLA 2026 등 업데이트가 필요한 근거자산을 추적한다.</p>
+        </div>
+        <div id="publicationTrackerGrid" class="tracker-grid"></div>
+      </section>
+
+      <section id="monthly-brief" class="section" data-category="execution" data-page="execution" aria-labelledby="monthly-brief-title">
+        <div class="section-heading">
+          <p class="eyebrow">Monthly PM Brief</p>
+          <h2 id="monthly-brief-title">월간 PM Brief Generator</h2>
+          <p>지침, 근거, 현장 반론, 시장 신호, claim hygiene, 다음 액션을 한 화면으로 압축한다.</p>
+        </div>
+        <div id="monthlyBriefGrid" class="brief-grid"></div>
+      </section>
+
+      <section id="tracker" class="section" data-category="execution" data-page="execution" aria-labelledby="tracker-title">
+        <div class="section-heading">
+          <p class="eyebrow">Update Watch</p>
+          <h2 id="tracker-title">KSoLA 2026 Update Tracker</h2>
+          <p>2026년판 진료지침과 신규 치료 옵션이 나오면 무엇을 업데이트할지 미리 정한다.</p>
+        </div>
+        <div id="updateTracker" class="tracker-grid"></div>
+      </section>
+
+      <section id="curriculum" class="section" data-category="execution" data-page="execution" aria-labelledby="curriculum-title">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Path</p>
+          <h2 id="curriculum-title">5주 학습 구조</h2>
+          <p>한 주에 하나의 질문만 깊게 파고, 마지막 주에 field execution으로 묶는다.</p>
+        </div>
+        <ol id="learningTimeline" class="timeline"></ol>
+      </section>
+
+      <section id="library" class="section library-section" data-category="library" data-page="library" aria-labelledby="library-title">
+        <div class="section-heading">
+          <p class="eyebrow">Deep Library</p>
+          <h2 id="library-title">심화 학습 라이브러리</h2>
+          <p>지질 생물학, 위험도, 지침 workflow, 약물치료, 안전성, 시장, field execution, 논문 독해, 용어를 PM 학습 단위로 잘게 나눠 검색한다.</p>
+        </div>
+        <div id="librarySummaryGrid" class="library-summary-grid" aria-label="라이브러리 카테고리 요약"></div>
+        <form class="library-controls" aria-label="학습 라이브러리 필터">
+          <label>
+            Category
+            <select id="libraryCategory"></select>
+          </label>
+          <label>
+            Search
+            <input id="librarySearch" type="search" placeholder="ApoB, EROICA, SAMS, C10C">
+          </label>
+          <output id="libraryCount" aria-live="polite"></output>
+        </form>
+        <div id="libraryGrid" class="library-grid"></div>
+      </section>
+
+      <section id="quiz" class="section quiz-section" data-category="execution" data-page="execution" aria-labelledby="quiz-title">
+        <div class="section-heading">
+          <p class="eyebrow">PM Self Check</p>
+          <h2 id="quiz-title">퀴즈 카드</h2>
+          <p>지침, ATC, 제품, 임상근거를 PM 언어로 설명할 수 있는지 확인한다.</p>
+        </div>
+        <article class="quiz-card">
+          <div class="quiz-progress" id="quizProgress"></div>
+          <p id="quizQuestion" class="quiz-question"></p>
+          <p id="quizAnswer" class="quiz-answer" hidden></p>
+          <div class="quiz-actions">
+            <button type="button" id="prevQuiz">이전</button>
+            <button type="button" id="toggleAnswer">정답 보기</button>
+            <button type="button" id="nextQuiz">다음</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>주의</strong>
+        <p>이 사이트는 PM 학습용 구조화 자료다. 개별 환자의 진단·치료 의사결정은 허가사항, 최신 지침, 전문의 판단을 따른다.</p>
+      </div>
+      <nav id="sourceLinks" aria-label="주요 출처"></nav>
+    </footer>
+  </body>
+</html>

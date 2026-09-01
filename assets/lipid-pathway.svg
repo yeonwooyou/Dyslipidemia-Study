@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="560" viewBox="0 0 920 560" role="img" aria-labelledby="title desc">
+  <title id="title">Rosuvastatin and Ezetimibe Dual Inhibition</title>
+  <desc id="desc">A structured study diagram showing hepatic cholesterol synthesis inhibition and intestinal cholesterol absorption inhibition converging on LDL-C reduction.</desc>
+  <rect width="920" height="560" fill="#fbfdf9"/>
+  <path d="M0 420H920V560H0z" fill="#e8f2ec"/>
+  <path d="M92 102h294c25 0 46 21 46 46v220c0 25-21 46-46 46H92c-25 0-46-21-46-46V148c0-25 21-46 46-46z" fill="#f8efe8" stroke="#263631" stroke-width="3"/>
+  <path d="M534 102h294c25 0 46 21 46 46v220c0 25-21 46-46 46H534c-25 0-46-21-46-46V148c0-25 21-46 46-46z" fill="#e7f4f2" stroke="#263631" stroke-width="3"/>
+  <text x="92" y="158" fill="#263631" font-family="Arial, sans-serif" font-size="28" font-weight="700">Liver</text>
+  <text x="534" y="158" fill="#263631" font-family="Arial, sans-serif" font-size="28" font-weight="700">Intestine</text>
+  <text x="92" y="192" fill="#61706b" font-family="Arial, sans-serif" font-size="17">cholesterol synthesis</text>
+  <text x="534" y="192" fill="#61706b" font-family="Arial, sans-serif" font-size="17">cholesterol absorption</text>
+  <path d="M128 284c30-56 97-84 160-67 49 13 82 47 103 93-35 36-80 55-134 55-61 0-105-27-129-81z" fill="#df714f" opacity=".88"/>
+  <path d="M188 250c44 7 88 32 144 93" fill="none" stroke="#fff3d6" stroke-width="12" stroke-linecap="round"/>
+  <path d="M593 224c-32 52-25 111 24 154 52-25 85-66 99-122 13 53 47 94 103 122 50-43 57-102 25-154-39 20-65 45-77 76-13-31-38-56-77-76-19 10-35 23-48 39-13-16-29-29-49-39z" fill="#2f968c" opacity=".88"/>
+  <rect x="112" y="64" width="236" height="56" rx="8" fill="#263631"/>
+  <text x="132" y="99" fill="#fff" font-family="Arial, sans-serif" font-size="22" font-weight="700">Rosuvastatin</text>
+  <rect x="554" y="64" width="208" height="56" rx="8" fill="#263631"/>
+  <text x="574" y="99" fill="#fff" font-family="Arial, sans-serif" font-size="22" font-weight="700">Ezetimibe</text>
+  <path d="M232 120v76" stroke="#263631" stroke-width="4" stroke-linecap="round"/>
+  <path d="M658 120v76" stroke="#263631" stroke-width="4" stroke-linecap="round"/>
+  <path d="M206 191h52M632 191h52" stroke="#263631" stroke-width="8" stroke-linecap="round"/>
+  <path d="M386 282h122" stroke="#263631" stroke-width="5" stroke-linecap="round"/>
+  <path d="M508 282l-22-18v36z" fill="#263631"/>
+  <path d="M392 342c71 73 190 73 261 0" fill="none" stroke="#263631" stroke-width="5" stroke-linecap="round"/>
+  <path d="M657 342l-34-4 19 29z" fill="#263631"/>
+  <rect x="316" y="434" width="288" height="72" rx="8" fill="#f2c861" stroke="#263631" stroke-width="3"/>
+  <text x="353" y="464" fill="#263631" font-family="Arial, sans-serif" font-size="24" font-weight="800">LDL-C Goal</text>
+  <text x="353" y="492" fill="#263631" font-family="Arial, sans-serif" font-size="18">target attainment pressure</text>
+  <path d="M250 414c50 47 105 69 166 66" fill="none" stroke="#263631" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
+  <path d="M673 414c-47 46-102 68-164 66" fill="none" stroke="#263631" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
+  <text x="92" y="396" fill="#263631" font-family="Arial, sans-serif" font-size="18" font-weight="700">HMG-CoA reductase</text>
+  <text x="534" y="396" fill="#263631" font-family="Arial, sans-serif" font-size="18" font-weight="700">NPC1L1 pathway</text>
+  <circle cx="120" cy="462" r="12" fill="#df714f"/>
+  <circle cx="800" cy="462" r="12" fill="#2f968c"/>
+  <text x="142" y="468" fill="#61706b" font-family="Arial, sans-serif" font-size="16">synthesis ↓</text>
+  <text x="822" y="468" fill="#61706b" font-family="Arial, sans-serif" font-size="16">absorption ↓</text>
+</svg>

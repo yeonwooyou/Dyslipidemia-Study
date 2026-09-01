@@ -1,0 +1,113 @@
+:root {
+  --color-canvas: oklch(96% 0.012 230);
+  --color-surface: oklch(99% 0.004 230);
+  --color-ink: oklch(18% 0.035 245);
+  --color-muted: oklch(45% 0.026 245);
+  --color-line: oklch(82% 0.022 235);
+  --color-teal: oklch(55% 0.13 190);
+  --color-coral: oklch(60% 0.17 28);
+  --color-amber: oklch(79% 0.15 82);
+  --color-indigo: oklch(43% 0.14 268);
+  --shadow-panel: 0 22px 58px rgb(28 42 62 / 14%);
+  --shadow-soft: 0 12px 34px rgb(28 42 62 / 10%);
+  --font-display: "Avenir Next", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+  --font-body: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Avenir Next", system-ui, sans-serif;
+  --text-hero: 4rem;
+}
+
+body {
+  background:
+    linear-gradient(90deg, rgb(25 67 116 / 6%) 1px, transparent 1px),
+    linear-gradient(0deg, rgb(25 67 116 / 5%) 1px, transparent 1px),
+    linear-gradient(180deg, oklch(98% 0.006 230), var(--color-canvas));
+  background-size: 34px 34px, 34px 34px, auto;
+  font-feature-settings: "kern";
+}
+
+h1,
+h2,
+h3,
+.brand strong,
+.dashboard-strip strong,
+.ldl-result strong,
+.case-result strong {
+  font-family: var(--font-display);
+  font-weight: 820;
+}
+
+h1 {
+  max-width: 13ch;
+}
+
+.app-header {
+  border-bottom-color: color-mix(in oklch, var(--color-line), var(--color-ink) 8%);
+  background: color-mix(in oklch, var(--color-surface), transparent 5%);
+}
+
+.brand-mark {
+  border: 0;
+  background: var(--color-ink);
+  color: white;
+  box-shadow: inset 0 -0.25rem 0 rgb(255 255 255 / 12%);
+}
+
+.top-nav a {
+  font-weight: 760;
+}
+
+.top-nav a:hover {
+  border-color: color-mix(in oklch, var(--color-teal), var(--color-line) 40%);
+  background: color-mix(in oklch, var(--color-teal), white 88%);
+}
+
+.section-heading {
+  max-width: 850px;
+}
+
+.section-heading h2 {
+  text-wrap: balance;
+}
+
+.pathway-figure,
+.dashboard-strip,
+.detail-panel,
+.calculator,
+.quiz-card,
+.product-card,
+.atc-card,
+.evidence-card,
+.case-simulator,
+.case-result,
+.dose-card,
+.competitor-card,
+.pico-card,
+.deep-study-card,
+.atlas-card,
+.atlas-controls,
+.claim-card,
+.objection-card,
+.tracker-card {
+  box-shadow: var(--shadow-soft);
+}
+
+.dashboard-strip article {
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--color-surface), var(--color-teal) 4%), var(--color-surface));
+}
+
+.primary-action,
+button {
+  box-shadow: 0 0.45rem 0 color-mix(in oklch, var(--color-ink), black 10%);
+}
+
+.primary-action:hover,
+.secondary-action:hover,
+button:hover {
+  opacity: 0.94;
+}
+
+input,
+select {
+  border-color: color-mix(in oklch, var(--color-line), var(--color-ink) 8%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 70%);
+}

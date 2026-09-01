@@ -1,0 +1,330 @@
+:root {
+  --space-section-tight: 2.75rem;
+  --component-gap: 0.9rem;
+  --component-gap-lg: 1.25rem;
+  --card-padding-compact: 1.05rem;
+  --nav-chip-bg: color-mix(in oklch, var(--color-surface), var(--color-canvas) 18%);
+  --foundation-accent: var(--color-teal);
+  --strategy-accent: var(--color-coral);
+  --evidence-accent: var(--color-indigo);
+  --execution-accent: var(--color-amber);
+}
+
+main {
+  gap: var(--space-section-tight);
+  padding-block: var(--space-6);
+}
+
+.section {
+  scroll-margin-top: 8rem;
+}
+
+.grouped-nav {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  min-height: 2.45rem;
+  padding: 0.25rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--nav-chip-bg);
+}
+
+.nav-cluster > span {
+  min-width: 5.4rem;
+  padding: 0.42rem 0.55rem;
+  border-right: 1px solid var(--color-line);
+  color: var(--color-ink);
+  font-size: 0.74rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.top-nav.grouped-nav a {
+  padding: 0.42rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.category-map-section {
+  margin-top: -1rem;
+  padding-block: var(--space-4) var(--space-2);
+}
+
+.category-map-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--component-gap);
+}
+
+.category-map-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--component-gap);
+}
+
+.category-tile {
+  display: grid;
+  gap: var(--space-2);
+  min-height: 9.75rem;
+  padding: var(--card-padding-compact);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  text-decoration: none;
+  box-shadow: var(--shadow-soft);
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.category-tile:hover {
+  opacity: 0.96;
+  transform: translateY(-2px);
+}
+
+.category-tile span {
+  justify-self: start;
+  padding: 0.22rem 0.5rem;
+  border-radius: 6px;
+  background: var(--color-ink);
+  color: white;
+  font-size: var(--text-xs);
+  font-weight: 850;
+}
+
+.category-tile strong {
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  line-height: 1.2;
+}
+
+.category-tile small {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  line-height: 1.45;
+}
+
+.category-foundation {
+  border-top: 6px solid var(--foundation-accent);
+}
+
+.category-strategy {
+  border-top: 6px solid var(--strategy-accent);
+}
+
+.category-evidence {
+  border-top: 6px solid var(--evidence-accent);
+}
+
+.category-execution {
+  border-top: 6px solid var(--execution-accent);
+}
+
+.section[data-category]:not(.section-intro) {
+  padding-block: var(--space-4);
+  border-top: 1px solid color-mix(in oklch, var(--color-line), white 25%);
+}
+
+.section[data-category] > .section-heading {
+  display: grid;
+  grid-template-columns: minmax(9.5rem, 0.22fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-2) var(--component-gap-lg);
+  max-width: none;
+  margin-bottom: var(--component-gap-lg);
+}
+
+.section[data-category] > .section-heading .eyebrow {
+  grid-row: span 2;
+  align-self: start;
+  padding: 0.38rem 0.58rem;
+  border-left: 4px solid currentColor;
+  background: color-mix(in oklch, currentColor, white 90%);
+}
+
+.section[data-category] > .section-heading h2 {
+  font-size: 1.72rem;
+  line-height: 1.15;
+}
+
+.section[data-category] > .section-heading p:not(.eyebrow) {
+  max-width: 78ch;
+  line-height: 1.5;
+}
+
+.section[data-category="foundation"] > .section-heading .eyebrow {
+  color: var(--foundation-accent);
+}
+
+.section[data-category="strategy"] > .section-heading .eyebrow {
+  color: var(--strategy-accent);
+}
+
+.section[data-category="evidence"] > .section-heading .eyebrow {
+  color: var(--evidence-accent);
+}
+
+.section[data-category="execution"] > .section-heading .eyebrow {
+  color: oklch(48% 0.13 82);
+}
+
+.detail-panel,
+.calculator,
+.case-simulator,
+.strategy-tool-shell,
+.training-shell,
+.atlas-controls,
+.quiz-card {
+  padding: var(--card-padding-compact);
+}
+
+.product-card,
+.atc-card,
+.evidence-card,
+.dose-card,
+.competitor-card,
+.pico-card,
+.deep-study-card,
+.atlas-card,
+.claim-card,
+.objection-card,
+.tracker-card,
+.strategy-card,
+.war-card,
+.quality-card,
+.brief-card,
+.publication-card {
+  gap: var(--component-gap);
+  padding: var(--card-padding-compact);
+}
+
+.strategy-card,
+.war-card,
+.competitor-card,
+.atlas-card {
+  min-height: auto;
+}
+
+.strategy-card,
+.war-card {
+  align-content: start;
+}
+
+.strategy-card-grid,
+.war-room-grid,
+.quality-grid,
+.brief-grid,
+.direct-study-grid,
+.evidence-atlas-grid,
+.dose-grid,
+.competitor-grid,
+.pico-grid,
+.claim-columns,
+.tracker-grid,
+.product-grid,
+.atc-grid,
+.evidence-grid {
+  gap: var(--component-gap);
+}
+
+.strategy-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.competitor-grid,
+.war-room-grid,
+.quality-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.evidence-atlas-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.definition-list {
+  gap: 0.42rem var(--component-gap);
+}
+
+.definition-list dt {
+  font-size: 0.78rem;
+}
+
+.definition-list dd,
+.check-list li,
+.node-list li {
+  line-height: 1.45;
+}
+
+.atlas-card .definition-list {
+  grid-template-columns: minmax(5.2rem, 0.2fr) minmax(0, 1fr);
+}
+
+.table-shell table {
+  min-width: 760px;
+}
+
+th,
+td {
+  padding: 0.62rem 0.72rem;
+}
+
+@media (max-width: 1240px) {
+  .grouped-nav {
+    grid-template-columns: repeat(2, max-content);
+  }
+
+  .category-map-grid,
+  .strategy-card-grid,
+  .competitor-grid,
+  .war-room-grid,
+  .quality-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .app-header {
+    align-items: stretch;
+  }
+
+  .grouped-nav,
+  .category-map-grid,
+  .strategy-card-grid,
+  .competitor-grid,
+  .war-room-grid,
+  .quality-grid,
+  .evidence-atlas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-cluster {
+    flex-wrap: wrap;
+  }
+
+  .nav-cluster > span {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .section[data-category] > .section-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .section[data-category] > .section-heading .eyebrow {
+    grid-row: auto;
+    width: max-content;
+    max-width: 100%;
+  }
+}
