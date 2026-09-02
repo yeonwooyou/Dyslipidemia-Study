@@ -24,6 +24,10 @@
 
 가시성 개선은 `layout-refresh.css`와 `pages.css`에서 관리한다. 상단 navigation은 6개 페이지 탭으로 줄였고, 모바일에서는 메뉴 버튼으로 접힌다. 각 섹션은 `data-page`로 배정되어 선택한 페이지의 내용만 표시된다.
 
+## 로그인 게이트
+
+접속 시 [auth.js](auth.js)와 [auth.css](auth.css)가 `CVD1 / CVD1` 로그인 화면을 먼저 보여준다. 이 기능은 정적 프론트엔드에서 구현한 접근 화면이므로 실제 보안 인증이 아니다. 외부 공개를 엄격히 막아야 하면 Netlify password protection, Netlify Identity, 서버 인증 중 하나를 별도로 적용한다.
+
 ## Netlify 배포
 
 Netlify는 [netlify.toml](netlify.toml)의 설정을 사용한다.

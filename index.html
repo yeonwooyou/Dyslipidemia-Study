@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="theme-refresh.css">
     <link rel="stylesheet" href="layout-refresh.css">
     <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="auth.css">
     <script src="evidence-data.js" defer></script>
     <script src="statin-evidence-data.js" defer></script>
     <script src="library-data.js" defer></script>
@@ -23,9 +24,32 @@
     <script src="script.js" defer></script>
     <script src="strategy-tools.js" defer></script>
     <script src="page-router.js" defer></script>
+    <script src="auth.js" defer></script>
   </head>
-  <body>
-    <header class="app-header">
+  <body class="auth-locked">
+    <section class="login-screen" id="loginScreen" aria-labelledby="loginTitle">
+      <article class="login-panel">
+        <div class="login-copy">
+          <p class="eyebrow">Private Study Access</p>
+          <h1 id="loginTitle">CVD Learning Login</h1>
+          <p>로수젯과 이상지질혈증 학습 콘솔에 접근하려면 계정을 입력한다.</p>
+        </div>
+        <form class="login-form" id="loginForm" novalidate>
+          <label>
+            아이디
+            <input id="loginId" name="username" type="text" autocomplete="username" required>
+          </label>
+          <label>
+            비밀번호
+            <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
+          </label>
+          <p class="login-error" id="loginError" role="alert" hidden>아이디 또는 비밀번호가 맞지 않습니다.</p>
+          <button type="submit">로그인</button>
+        </form>
+      </article>
+    </section>
+
+    <header class="app-header" data-auth-content>
       <a class="brand" href="#home" aria-label="Rosuzet PM Study Console home">
         <span class="brand-mark" aria-hidden="true">RZ</span>
         <span>
@@ -44,13 +68,16 @@
         <a href="#execution" data-page-link="execution">Execution</a>
         <a href="#library" data-page-link="library">Library</a>
       </nav>
-      <div class="page-status" aria-live="polite">
-        <span>현재 페이지</span>
-        <strong id="activePageTitle">Home</strong>
+      <div class="session-actions">
+        <div class="page-status" aria-live="polite">
+          <span>현재 페이지</span>
+          <strong id="activePageTitle">Home</strong>
+        </div>
+        <button class="logout-button" id="logoutButton" type="button">Logout</button>
       </div>
     </header>
 
-    <main>
+    <main data-auth-content>
       <section id="overview" class="section section-intro" data-category="foundation" data-page="home" aria-labelledby="overview-title">
         <div class="intro-copy">
           <p class="eyebrow">로수젯 / Rosuzet</p>
@@ -443,7 +470,7 @@
       </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" data-auth-content>
       <div>
         <strong>주의</strong>
         <p>이 사이트는 PM 학습용 구조화 자료다. 개별 환자의 진단·치료 의사결정은 허가사항, 최신 지침, 전문의 판단을 따른다.</p>

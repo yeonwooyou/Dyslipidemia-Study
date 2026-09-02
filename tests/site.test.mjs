@@ -33,6 +33,14 @@ const loadLibraryData = async () => {
   return context.globalThis.LibraryData;
 };
 
+const loadAuthGate = async () => {
+  const code = await readText("../auth.js");
+  const context = { globalThis: {} };
+  vm.createContext(context);
+  vm.runInContext(code, context);
+  return context.globalThis.AuthGate;
+};
+
 test("site shell uses external assets and CSP without unsafe-inline", async () => {
   const html = await readText("../index.html");
 
@@ -40,6 +48,7 @@ test("site shell uses external assets and CSP without unsafe-inline", async () =
   assert.doesNotMatch(html, /unsafe-inline/);
   assert.match(html, /<link rel="stylesheet" href="styles\.css">/);
   assert.match(html, /<link rel="stylesheet" href="pages\.css">/);
+  assert.match(html, /<link rel="stylesheet" href="auth\.css">/);
   assert.match(html, /<script src="evidence-data\.js" defer><\/script>/);
   assert.match(html, /<script src="statin-evidence-data\.js" defer><\/script>/);
   assert.match(html, /<script src="library-data\.js" defer><\/script>/);
@@ -48,6 +57,7 @@ test("site shell uses external assets and CSP without unsafe-inline", async () =
   assert.match(html, /<script src="script\.js" defer><\/script>/);
   assert.match(html, /<script src="strategy-tools\.js" defer><\/script>/);
   assert.match(html, /<script src="page-router\.js" defer><\/script>/);
+  assert.match(html, /<script src="auth\.js" defer><\/script>/);
   assert.match(html, /<section id="guidelines"/);
   assert.match(html, /<section id="cases"/);
   assert.match(html, /<section id="targets"/);
@@ -71,6 +81,27 @@ test("site shell uses external assets and CSP without unsafe-inline", async () =
   assert.match(html, /<section id="evidence-atlas"/);
   assert.match(html, /<section id="library"/);
   assert.match(html, /<section id="quiz"/);
+});
+
+test("login gate blocks the app shell until CVD1 credentials are entered", async () => {
+  const html = await readText("../index.html");
+  const css = await readText("../auth.css");
+  const auth = await loadAuthGate();
+
+  assert.match(html, /<body class="auth-locked">/);
+  assert.match(html, /id="loginScreen"/);
+  assert.match(html, /id="loginForm"/);
+  assert.match(html, /id="loginId"/);
+  assert.match(html, /id="loginPassword"/);
+  assert.match(html, /id="logoutButton"/);
+  assert.equal((html.match(/data-auth-content/g) || []).length >= 3, true);
+  assert.match(css, /body\.auth-locked \[data-auth-content\]/);
+  assert.match(css, /\.login-screen/);
+  assert.match(css, /\.logout-button/);
+  assert.equal(auth.authenticate({ username: "CVD1", password: "CVD1" }), true);
+  assert.equal(auth.authenticate({ username: " CVD1 ", password: "CVD1" }), true);
+  assert.equal(auth.authenticate({ username: "CVD1", password: "wrong" }), false);
+  assert.equal(auth.authenticate({ username: "wrong", password: "CVD1" }), false);
 });
 
 test("theme refresh replaces the serif-heavy font system", async () => {

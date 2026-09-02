@@ -1,0 +1,142 @@
+:root {
+  --auth-panel-width: min(28rem, calc(100vw - 2rem));
+  --auth-field-bg: color-mix(in oklch, var(--color-surface), white 45%);
+  --auth-accent: oklch(54% 0.12 178);
+  --auth-danger: oklch(52% 0.18 24);
+}
+
+body.auth-locked {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+body.auth-locked [data-auth-content] {
+  display: none !important;
+}
+
+body.auth-unlocked .login-screen {
+  display: none !important;
+}
+
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-8);
+  background:
+    linear-gradient(135deg, rgb(47 150 140 / 13%), transparent 38%),
+    linear-gradient(315deg, rgb(223 113 79 / 12%), transparent 42%),
+    var(--color-canvas);
+}
+
+.login-panel {
+  width: var(--auth-panel-width);
+  display: grid;
+  gap: var(--space-6);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: color-mix(in oklch, var(--color-surface), white 50%);
+  box-shadow: var(--shadow-panel);
+}
+
+.login-copy {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.login-copy h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.7rem + 1.4vw, 2.7rem);
+  line-height: 1.05;
+}
+
+.login-copy p:not(.eyebrow) {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.login-form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.login-form label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  font-weight: 820;
+}
+
+.login-form input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0 0.8rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--auth-field-bg);
+  color: var(--color-ink);
+}
+
+.login-form button,
+.logout-button {
+  border: 1px solid color-mix(in oklch, var(--auth-accent), black 18%);
+  border-radius: var(--radius);
+  background: var(--color-ink);
+  color: white;
+  font-weight: 860;
+  cursor: pointer;
+}
+
+.login-form button:hover,
+.logout-button:hover {
+  background: color-mix(in oklch, var(--color-ink), var(--auth-accent) 22%);
+}
+
+.login-error {
+  margin: 0;
+  padding: 0.7rem 0.85rem;
+  border-left: 4px solid var(--auth-danger);
+  border-radius: 6px;
+  background: color-mix(in oklch, var(--auth-danger), white 90%);
+  color: color-mix(in oklch, var(--auth-danger), black 30%);
+  font-weight: 800;
+}
+
+.session-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.logout-button {
+  min-height: 2.45rem;
+  padding: 0 0.78rem;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 1180px) {
+  .session-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .login-screen {
+    padding: var(--space-4);
+  }
+
+  .session-actions {
+    justify-self: stretch;
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .logout-button {
+    width: 100%;
+  }
+}
