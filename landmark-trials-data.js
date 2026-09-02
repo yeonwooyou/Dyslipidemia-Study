@@ -27,7 +27,13 @@ const LandmarkTrialData = (() => {
   ];
 
   function trial(id, title, year, category, population, intervention, comparator, endpoint, result, pmUse, guardrail) {
-    return { category, comparator, endpoint, guardrail, id, intervention, pmUse, population, result, title, year };
+    const pico = {
+      comparator,
+      intervention,
+      outcome: endpoint,
+      population
+    };
+    return { category, comparator, endpoint, guardrail, id, intervention, pico, pmUse, population, result, title, year };
   }
 
   const getLandmarkTrialById = (id) => landmarkTrials.find((trialItem) => trialItem.id === id);

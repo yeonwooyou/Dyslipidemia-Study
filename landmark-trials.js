@@ -44,18 +44,28 @@
 
   const trialCard = (trial) => {
     const article = element("article", { className: "landmark-trial-card" });
+    const picoDetails = document.createElement("details");
+    picoDetails.className = "landmark-pico";
+    const picoSummary = document.createElement("summary");
+    picoSummary.textContent = "PICO / Guardrail";
+    picoDetails.replaceChildren(
+      picoSummary,
+      definitionList([
+        ["Population", trial.pico.population],
+        ["Intervention", trial.pico.intervention],
+        ["Comparator", trial.pico.comparator],
+        ["Outcome", trial.pico.outcome],
+        ["Guardrail", trial.guardrail]
+      ])
+    );
     article.replaceChildren(
       element("span", { className: "landmark-year", text: trial.year }),
       element("h3", { text: trial.title }),
       definitionList([
-        ["Population", trial.population],
-        ["Intervention", trial.intervention],
-        ["Comparator", trial.comparator],
-        ["Endpoint", trial.endpoint],
         ["Result", trial.result],
-        ["PM use", trial.pmUse],
-        ["Guardrail", trial.guardrail]
-      ])
+        ["PM use", trial.pmUse]
+      ]),
+      picoDetails
     );
     return article;
   };

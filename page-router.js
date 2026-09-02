@@ -6,7 +6,8 @@
     strategy: "Strategy",
     evidence: "Evidence",
     execution: "Execution",
-    library: "Library"
+    library: "Library",
+    sources: "Sources"
   };
   const pages = Object.keys(pageLabels);
   let libraryState = { category: "all", query: "" };
@@ -84,6 +85,7 @@
     }
     updateLinks(page);
     closeMenu();
+    document.dispatchEvent(new CustomEvent("pagechange", { detail: { page } }));
   };
 
   const renderLibrarySummary = () => {

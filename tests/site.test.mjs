@@ -375,12 +375,12 @@ test("multi-page shell exposes clean responsive page navigation", async () => {
   const router = await readText("../page-router.js");
   const pageLinks = html.match(/data-page-link="/g) || [];
 
-  ["home", "foundation", "strategy", "evidence", "execution", "library"].forEach((page) => {
+  ["home", "foundation", "strategy", "evidence", "execution", "library", "sources"].forEach((page) => {
     assert.match(html, new RegExp(`data-page-link="${page}"`));
     assert.match(html, new RegExp(`data-page="${page}"`));
   });
 
-  assert.equal(pageLinks.length, 6);
+  assert.equal(pageLinks.length, 7);
   assert.match(html, /id="menuToggle"/);
   assert.match(html, /id="pageNav"/);
   assert.match(html, /id="activePageTitle"/);
