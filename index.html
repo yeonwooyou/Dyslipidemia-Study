@@ -16,12 +16,23 @@
     <link rel="stylesheet" href="layout-refresh.css">
     <link rel="stylesheet" href="pages.css">
     <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="foundation-learning.css">
+    <link rel="stylesheet" href="fact-sheet.css">
+    <link rel="stylesheet" href="landmark-trials.css">
+    <script src="definition-data.js" defer></script>
+    <script src="mechanism-data.js" defer></script>
+    <script src="statin-profile-data.js" defer></script>
+    <script src="fact-sheet-data.js" defer></script>
+    <script src="landmark-trials-data.js" defer></script>
     <script src="evidence-data.js" defer></script>
     <script src="statin-evidence-data.js" defer></script>
     <script src="library-data.js" defer></script>
     <script src="strategy-data.js" defer></script>
     <script src="site-data.js" defer></script>
     <script src="script.js" defer></script>
+    <script src="foundation-learning.js" defer></script>
+    <script src="fact-sheet.js" defer></script>
+    <script src="landmark-trials.js" defer></script>
     <script src="strategy-tools.js" defer></script>
     <script src="page-router.js" defer></script>
     <script src="auth.js" defer></script>
@@ -161,6 +172,53 @@
           <p>Cardiology, Endocrinology, Neurology, Nephrology, Primary care를 서로 다른 환자·근거·가드레일로 분리한다.</p>
         </div>
         <div id="segmentPlaybookGrid" class="strategy-card-grid"></div>
+      </section>
+
+      <section id="dyslipidemia-definition" class="section" data-category="foundation" data-page="foundation" aria-labelledby="definition-title">
+        <div class="section-heading">
+          <p class="eyebrow">Disease Definition</p>
+          <h2 id="definition-title">이상지질혈증 정의와 분류</h2>
+          <p>첫 학습은 질환명을 외우는 것이 아니라 LDL-C, non-HDL-C, TG, HDL-C 조합과 위험도 연결을 구분하는 것이다.</p>
+        </div>
+        <p id="definitionFrame" class="foundation-frame"></p>
+        <div id="definitionGrid" class="foundation-card-grid"></div>
+      </section>
+
+      <section id="statin-mechanism" class="section" data-category="foundation" data-page="foundation" aria-labelledby="mechanism-title">
+        <div class="section-heading">
+          <p class="eyebrow">Statin MOA</p>
+          <h2 id="mechanism-title">스타틴 작용기전</h2>
+          <p>HMG-CoA reductase 억제에서 LDL receptor 증가, 혈중 LDL-C clearance, ezetimibe 보완 기전까지 한 흐름으로 본다.</p>
+        </div>
+        <div id="mechanismGrid" class="mechanism-grid"></div>
+        <p id="combinationRationale" class="foundation-frame"></p>
+      </section>
+
+      <section id="statin-profiles" class="section" data-category="foundation" data-page="foundation" aria-labelledby="statin-profiles-title">
+        <div class="section-heading">
+          <p class="eyebrow">Statin Profiles</p>
+          <h2 id="statin-profiles-title">스타틴 개발, 성분 특성, 오리지널, 급여가격</h2>
+          <p>KSoLA 지침의 성분별 특성 표를 PM 학습용으로 풀어 성분별 대사, 반감기, 오리지널, 대표 보험상한가를 비교한다.</p>
+        </div>
+        <ol id="statinTimeline" class="statin-timeline"></ol>
+        <div id="statinProfileGrid" class="statin-profile-grid"></div>
+        <div class="price-heading">
+          <h3>대표 급여가격 Snapshot</h3>
+          <p id="priceSourceNote"></p>
+        </div>
+        <div id="statinPriceGrid" class="statin-price-grid"></div>
+        <p id="priceUseGuardrail" class="foundation-frame"></p>
+      </section>
+
+      <section id="fact-sheet-2024" class="section" data-category="foundation" data-page="foundation" aria-labelledby="fact-sheet-title">
+        <div class="section-heading">
+          <p class="eyebrow">KSoLA Fact Sheet</p>
+          <h2 id="fact-sheet-title">Dyslipidemia Fact Sheet in Korea 2024</h2>
+          <p>KSoLA 2024 Fact Sheet를 시장 크기, 진단-치료-조절 funnel, 동반질환 segment로 해석한다.</p>
+        </div>
+        <div id="factSheetGrid" class="fact-sheet-grid"></div>
+        <div id="factSheetInterpretation" class="fact-interpretation-grid"></div>
+        <nav id="factSheetSources" class="fact-source-links" aria-label="KSoLA Fact Sheet sources"></nav>
       </section>
 
       <section id="guidelines" class="section" data-category="foundation" data-page="foundation" aria-labelledby="guidelines-title">
@@ -318,6 +376,16 @@
           <p>EROICA, REMBRANDT, SWITCH, ROSETTA-Stroke, RACING subgroup처럼 제품/전략 메시지에 가까운 연구를 claim guardrail과 함께 본다.</p>
         </div>
         <div id="directStudyGrid" class="direct-study-grid"></div>
+      </section>
+
+      <section id="landmark-trials" class="section" data-category="evidence" data-page="evidence" aria-labelledby="landmark-trials-title">
+        <div class="section-heading">
+          <p class="eyebrow">Landmark Trials</p>
+          <h2 id="landmark-trials-title">랜드마크 Trial 카테고리</h2>
+          <p>RACING, PROVE-IT, IDEAL, CARE, LIPID, 4S, TNT, HPS, ASCOT, AFCAPS/TexCAPS, WOSCOPS, HOPE-3, EWTOPIA 75, IMPROVE-IT을 별도 축으로 학습한다.</p>
+        </div>
+        <div id="landmarkTrialTabs" class="landmark-tabs" role="group" aria-label="Landmark trial categories"></div>
+        <div id="landmarkTrialGrid" class="landmark-trial-grid"></div>
       </section>
 
       <section id="evidence-grading" class="section" data-category="evidence" data-page="evidence" aria-labelledby="evidence-grading-title">

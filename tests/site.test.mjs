@@ -41,6 +41,46 @@ const loadAuthGate = async () => {
   return context.globalThis.AuthGate;
 };
 
+const loadFactSheetData = async () => {
+  const code = await readText("../fact-sheet-data.js");
+  const context = { globalThis: {} };
+  vm.createContext(context);
+  vm.runInContext(code, context);
+  return context.globalThis.FactSheetData;
+};
+
+const loadLandmarkTrialData = async () => {
+  const code = await readText("../landmark-trials-data.js");
+  const context = { globalThis: {} };
+  vm.createContext(context);
+  vm.runInContext(code, context);
+  return context.globalThis.LandmarkTrialData;
+};
+
+const loadDefinitionData = async () => {
+  const code = await readText("../definition-data.js");
+  const context = { globalThis: {} };
+  vm.createContext(context);
+  vm.runInContext(code, context);
+  return context.globalThis.DefinitionData;
+};
+
+const loadMechanismData = async () => {
+  const code = await readText("../mechanism-data.js");
+  const context = { globalThis: {} };
+  vm.createContext(context);
+  vm.runInContext(code, context);
+  return context.globalThis.MechanismData;
+};
+
+const loadStatinProfileData = async () => {
+  const code = await readText("../statin-profile-data.js");
+  const context = { globalThis: {} };
+  vm.createContext(context);
+  vm.runInContext(code, context);
+  return context.globalThis.StatinProfileData;
+};
+
 test("site shell uses external assets and CSP without unsafe-inline", async () => {
   const html = await readText("../index.html");
 
@@ -49,16 +89,36 @@ test("site shell uses external assets and CSP without unsafe-inline", async () =
   assert.match(html, /<link rel="stylesheet" href="styles\.css">/);
   assert.match(html, /<link rel="stylesheet" href="pages\.css">/);
   assert.match(html, /<link rel="stylesheet" href="auth\.css">/);
+  assert.match(html, /<link rel="stylesheet" href="foundation-learning\.css">/);
+  assert.match(html, /<link rel="stylesheet" href="fact-sheet\.css">/);
+  assert.match(html, /<link rel="stylesheet" href="landmark-trials\.css">/);
+  assert.match(html, /<script src="definition-data\.js" defer><\/script>/);
+  assert.match(html, /<script src="mechanism-data\.js" defer><\/script>/);
+  assert.match(html, /<script src="statin-profile-data\.js" defer><\/script>/);
+  assert.match(html, /<script src="fact-sheet-data\.js" defer><\/script>/);
+  assert.match(html, /<script src="landmark-trials-data\.js" defer><\/script>/);
   assert.match(html, /<script src="evidence-data\.js" defer><\/script>/);
   assert.match(html, /<script src="statin-evidence-data\.js" defer><\/script>/);
   assert.match(html, /<script src="library-data\.js" defer><\/script>/);
   assert.match(html, /<script src="strategy-data\.js" defer><\/script>/);
   assert.match(html, /<script src="site-data\.js" defer><\/script>/);
   assert.match(html, /<script src="script\.js" defer><\/script>/);
+  assert.match(html, /<script src="foundation-learning\.js" defer><\/script>/);
+  assert.match(html, /<script src="fact-sheet\.js" defer><\/script>/);
+  assert.match(html, /<script src="landmark-trials\.js" defer><\/script>/);
   assert.match(html, /<script src="strategy-tools\.js" defer><\/script>/);
   assert.match(html, /<script src="page-router\.js" defer><\/script>/);
   assert.match(html, /<script src="auth\.js" defer><\/script>/);
+  assert.match(html, /<section id="dyslipidemia-definition"/);
+  assert.match(html, /id="definitionGrid"/);
+  assert.match(html, /<section id="statin-mechanism"/);
+  assert.match(html, /id="mechanismGrid"/);
+  assert.match(html, /<section id="statin-profiles"/);
+  assert.match(html, /id="statinProfileGrid"/);
+  assert.match(html, /id="statinPriceGrid"/);
   assert.match(html, /<section id="guidelines"/);
+  assert.match(html, /<section id="fact-sheet-2024"/);
+  assert.match(html, /id="factSheetGrid"/);
   assert.match(html, /<section id="cases"/);
   assert.match(html, /<section id="targets"/);
   assert.match(html, /<section id="dose-map"/);
@@ -78,9 +138,185 @@ test("site shell uses external assets and CSP without unsafe-inline", async () =
   assert.match(html, /<section id="publication-tracker"/);
   assert.match(html, /<section id="monthly-brief"/);
   assert.match(html, /<section id="direct-studies"/);
+  assert.match(html, /<section id="landmark-trials"/);
+  assert.match(html, /id="landmarkTrialGrid"/);
   assert.match(html, /<section id="evidence-atlas"/);
   assert.match(html, /<section id="library"/);
   assert.match(html, /<section id="quiz"/);
+});
+
+test("KSoLA 2024 fact sheet module captures epidemiology and PM interpretation", async () => {
+  const factSheet = await loadFactSheetData();
+  const ksola = factSheet.getFactSheetById("ksola-2024-dyslipidemia-fact-sheet");
+  const metricIds = new Set(factSheet.factSheetMetrics.map((metric) => metric.id));
+
+  assert.equal(ksola.publisher, "KSoLA");
+  assert.equal(ksola.factSheetYear, "2024");
+  assert.match(ksola.officialSourceUrl, /ksola\.or\.kr|lipid\.or\.kr/);
+  assert.match(ksola.journalSourceUrl, /10\.12997\/jla\.2025\.14\.3\.298|PMC12488789/);
+  assert.equal(factSheet.factSheetMetrics.length >= 8, true);
+
+  [
+    "dyslipidemia-prevalence-standard",
+    "dyslipidemia-prevalence-hdl-modified",
+    "hypercholesterolemia-2022",
+    "hypercholesterolemia-awareness",
+    "hypercholesterolemia-treatment",
+    "hypercholesterolemia-control",
+    "diabetes-comorbidity",
+    "hypertension-comorbidity"
+  ].forEach((id) => assert.equal(metricIds.has(id), true));
+
+  assert.match(factSheet.pmInterpretation.marketSizing, /40\.9%/);
+  assert.match(factSheet.pmInterpretation.claimGuardrail, /역학|제품/);
+});
+
+test("dyslipidemia definition module starts with classification structure", async () => {
+  const definition = await loadDefinitionData();
+  const sectionIds = new Set(definition.definitionSections.map((section) => section.id));
+
+  assert.equal(definition.definitionSections.length >= 5, true);
+  [
+    "core-definition",
+    "lipid-parameters",
+    "phenotypes",
+    "primary-secondary",
+    "risk-linked-treatment"
+  ].forEach((id) => assert.equal(sectionIds.has(id), true));
+
+  assert.match(definition.definitionSections[0].title, /정의/);
+  assert.match(definition.getDefinitionSectionById("phenotypes").summary, /LDL-C|TG|HDL-C/);
+  assert.match(definition.pmLearningFrame, /정의.*분류.*위험도/);
+});
+
+test("statin mechanism module explains LDL receptor biology and combination rationale", async () => {
+  const mechanism = await loadMechanismData();
+  const stepIds = new Set(mechanism.statinMechanismSteps.map((step) => step.id));
+
+  assert.equal(mechanism.statinMechanismSteps.length >= 5, true);
+  [
+    "hmg-coa-reductase",
+    "hepatic-cholesterol-pool",
+    "ldl-receptor-upregulation",
+    "plasma-ldl-clearance",
+    "rule-of-six",
+    "ezetimibe-complement"
+  ].forEach((id) => assert.equal(stepIds.has(id), true));
+
+  assert.match(mechanism.getMechanismStepById("hmg-coa-reductase").summary, /HMG-CoA reductase/);
+  assert.match(mechanism.getMechanismStepById("ldl-receptor-upregulation").pmUse, /LDL receptor/);
+  assert.match(mechanism.combinationRationale, /ezetimibe|흡수/);
+});
+
+test("statin profile module compares development, ingredient traits, originals, and prices", async () => {
+  const profile = await loadStatinProfileData();
+  const ingredientIds = new Set(profile.statinIngredientProfiles.map((item) => item.id));
+  const priceIds = new Set(profile.priceBenchmarks.map((item) => item.id));
+
+  assert.equal(profile.statinDevelopmentTimeline.length >= 7, true);
+  assert.equal(profile.statinIngredientProfiles.length, 7);
+  [
+    "lovastatin",
+    "pravastatin",
+    "simvastatin",
+    "fluvastatin",
+    "atorvastatin",
+    "rosuvastatin",
+    "pitavastatin"
+  ].forEach((id) => assert.equal(ingredientIds.has(id), true));
+
+  const rosuvastatin = profile.getStatinIngredientById("rosuvastatin");
+  const atorvastatin = profile.getStatinIngredientById("atorvastatin");
+  assert.match(rosuvastatin.originatorBrand, /Crestor|크레스토/);
+  assert.match(rosuvastatin.metabolism, /CYP2C9/);
+  assert.match(rosuvastatin.halfLife, /19/);
+  assert.match(atorvastatin.originatorBrand, /Lipitor|리피토/);
+  assert.match(atorvastatin.metabolism, /CYP3A4/);
+
+  [
+    "rosuzet-10-2-5",
+    "rosuzet-10-5",
+    "rosuzet-10-10",
+    "rosuzet-10-20",
+    "crestor-10",
+    "lipitor-10"
+  ].forEach((id) => assert.equal(priceIds.has(id), true));
+
+  assert.equal(profile.getPriceBenchmarkById("rosuzet-10-10").ceilingPriceWon, 1087);
+  assert.match(profile.priceSourceNote, /HIRA|약제급여목록/);
+  assert.match(profile.priceUseGuardrail, /최신 고시|재확인/);
+});
+
+test("landmark trial module keeps statin outcome anchors in a separate category", async () => {
+  const landmark = await loadLandmarkTrialData();
+  const trialIds = new Set(landmark.landmarkTrials.map((trial) => trial.id));
+  const categoryIds = new Set(landmark.landmarkCategories.map((category) => category.id));
+
+  assert.equal(landmark.landmarkTrials.length >= 14, true);
+  assert.equal(categoryIds.has("all"), true);
+  assert.equal(categoryIds.has("strategy-combination"), true);
+  assert.equal(categoryIds.has("primary-prevention"), true);
+  assert.equal(categoryIds.has("secondary-prevention"), true);
+  assert.equal(categoryIds.has("intensive-strategy"), true);
+  assert.equal(categoryIds.has("broad-high-risk"), true);
+
+  [
+    "racing",
+    "prove-it-timi-22",
+    "ideal",
+    "care",
+    "lipid",
+    "four-s",
+    "tnt",
+    "hps",
+    "hope-3",
+    "ascot-lla",
+    "afcaps-texcaps",
+    "woscops",
+    "improve-it",
+    "ewtopia-75"
+  ].forEach((id) => assert.equal(trialIds.has(id), true));
+
+  assert.match(landmark.getLandmarkTrialById("racing").pmUse, /로수젯|ezetimibe/);
+  assert.match(landmark.getLandmarkTrialById("improve-it").pmUse, /ezetimibe/);
+  assert.match(landmark.getLandmarkTrialById("ewtopia-75").guardrail, /고령|일본|open-label/);
+  assert.equal(landmark.getLandmarkTrialsByCategory("secondary-prevention").some((trial) => trial.id === "four-s"), true);
+  assert.equal(landmark.getLandmarkTrialsByCategory("primary-prevention").some((trial) => trial.id === "woscops"), true);
+});
+
+test("evidence archive documents currently used guidelines and papers", async () => {
+  const archiveReadme = await readText("../evidence_archive/README.md");
+  const guidelines = await readText("../evidence_archive/guidelines.md");
+  const landmarks = await readText("../evidence_archive/landmark_trials.md");
+  const rosuzet = await readText("../evidence_archive/rosuzet_and_nonstatin_evidence.md");
+
+  assert.match(archiveReadme, /PDF 원문을 복제하지 않는다/);
+  assert.match(archiveReadme, /last checked/);
+  assert.match(guidelines, /Dyslipidemia Fact Sheet 2024/);
+  assert.match(guidelines, /KSoLA/);
+  assert.match(guidelines, /ESC\/EAS/);
+  assert.match(guidelines, /ACC\/AHA/);
+  assert.match(guidelines, /WHO ATC/);
+  assert.match(guidelines, /C10BA06/);
+  assert.match(guidelines, /EPHMRA/);
+  assert.match(landmarks, /RACING/);
+  assert.match(landmarks, /PROVE-IT/);
+  assert.match(landmarks, /IDEAL/);
+  assert.match(landmarks, /CARE/);
+  assert.match(landmarks, /LIPID/);
+  assert.match(landmarks, /4S/);
+  assert.match(landmarks, /TNT/);
+  assert.match(landmarks, /HPS/);
+  assert.match(landmarks, /HOPE-3/);
+  assert.match(landmarks, /ASCOT/);
+  assert.match(landmarks, /AFCAPS\/TexCAPS/);
+  assert.match(landmarks, /WOSCOPS/);
+  assert.match(landmarks, /IMPROVE-IT/);
+  assert.match(landmarks, /EWTOPIA 75/);
+  assert.match(rosuzet, /EROICA/);
+  assert.match(rosuzet, /FOURIER/);
+  assert.match(rosuzet, /REDUCE-IT/);
+  assert.match(rosuzet, /claim guardrail/);
 });
 
 test("login gate blocks the app shell until CVD1 credentials are entered", async () => {

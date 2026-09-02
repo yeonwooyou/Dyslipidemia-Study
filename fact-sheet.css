@@ -1,0 +1,91 @@
+.fact-sheet-grid,
+.fact-interpretation-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.fact-sheet-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.fact-interpretation-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fact-metric-card,
+.fact-interpretation-card {
+  display: grid;
+  align-content: start;
+  gap: 0.62rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.fact-metric-card {
+  min-height: 12.5rem;
+  padding: 1rem;
+  border-top: 6px solid var(--color-teal);
+}
+
+.fact-metric-card span {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.fact-metric-card strong {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.fact-metric-card p,
+.fact-metric-card small,
+.fact-interpretation-card p {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.fact-metric-card small {
+  align-self: end;
+  color: var(--color-ink);
+  font-weight: 760;
+}
+
+.fact-interpretation-card {
+  padding: var(--space-5, 1.25rem);
+  border-left: 6px solid var(--color-coral);
+}
+
+.fact-interpretation-card h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  text-transform: capitalize;
+}
+
+.fact-source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+@media (max-width: 1120px) {
+  .fact-sheet-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .fact-sheet-grid,
+  .fact-interpretation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fact-metric-card {
+    min-height: auto;
+  }
+}
