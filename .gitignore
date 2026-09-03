@@ -5,3 +5,7 @@ dist/
 .env
 .env.*
 npm-debug.log*
+
+# Local evidence originals are tracked through metadata, not committed.
+evidence_archive/**/*.pdf
+evidence_archive/**/*.xlsx

@@ -5,7 +5,7 @@ last checked: 2026-09-02
 | Trial | Category | Core population | Intervention vs comparator | Main learning | Source |
 |---|---|---|---|---|---|
 | RACING | Combination / strategy | ASCVD, Korean patients | Rosuvastatin 10 mg + ezetimibe 10 mg vs rosuvastatin 20 mg | 로수젯 10/10과 가까운 strategy evidence. 브랜드 직접 superiority claim 금지 | https://pubmed.ncbi.nlm.nih.gov/35863366/ |
-| PROVE-IT TIMI 22 | Intensive statin | Recent ACS | Atorvastatin 80 mg vs pravastatin 40 mg | ACS 이후 intensive LDL-C lowering outcome anchor | https://pubmed.ncbi.nlm.nih.gov/16356805/ |
+| PROVE-IT TIMI 22 | Intensive statin | Recent ACS | Atorvastatin 80 mg vs pravastatin 40 mg | ACS 이후 intensive LDL-C lowering outcome anchor | https://pubmed.ncbi.nlm.nih.gov/15007110/ |
 | IDEAL | Intensive statin | Prior MI | Atorvastatin 80 mg vs simvastatin 20-40 mg | 고강도 statin 증량의 benefit magnitude와 endpoint hierarchy | https://pubmed.ncbi.nlm.nih.gov/16287954/ |
 | CARE | Secondary prevention | Prior MI with average cholesterol | Pravastatin 40 mg vs placebo | 평균 cholesterol에서도 recurrent event reduction | https://pubmed.ncbi.nlm.nih.gov/8801446/ |
 | LIPID | Secondary prevention | Prior MI or unstable angina | Pravastatin 40 mg vs placebo | CHD death, total mortality, major CV event reduction | https://pubmed.ncbi.nlm.nih.gov/9841303/ |

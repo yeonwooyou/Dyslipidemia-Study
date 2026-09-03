@@ -399,7 +399,7 @@ const StatinEvidence = (() => {
       pmUse: "PCI 이후 statin secondary prevention의 고전적 근거.",
       limitations: "Fluvastatin and PCI-era practice differ from current standards.",
       sourceTier: "A",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/12241832/"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/12076217/"
     },
     {
       id: "greace",
@@ -569,7 +569,7 @@ const StatinEvidence = (() => {
       pmUse: "근육 증상 상담에서 symptom, CK, functional impact를 분리.",
       limitations: "Healthy volunteers, short exposure and high-dose atorvastatin.",
       sourceTier: "A",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/23488547/"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/23183941/"
     },
     {
       id: "samson",

@@ -1,0 +1,427 @@
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p,
+li,
+dt,
+dd,
+label,
+button,
+input,
+select,
+textarea,
+.source-link,
+.archive-version-note {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --text-hero: 2.35rem;
+    --text-xl: 1.34rem;
+    --text-lg: 1.06rem;
+    --space-6: 1rem;
+    --space-8: 1rem;
+    --space-10: 1.5rem;
+    --space-14: 2rem;
+    --component-gap: 0.72rem;
+    --card-padding-compact: 0.9rem;
+    --mobile-page-padding: 1rem;
+  }
+
+  body,
+  body.auth-locked {
+    overflow-x: hidden;
+  }
+
+  body.auth-locked {
+    overflow-y: auto;
+  }
+
+  .login-screen {
+    align-items: start;
+    min-height: 100svh;
+    padding: var(--mobile-page-padding);
+  }
+
+  .login-panel {
+    width: min(100%, 28rem);
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .login-copy h1 {
+    font-size: 2rem;
+  }
+
+  .app-header {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 0.65rem;
+    align-items: center;
+    padding: 0.68rem var(--mobile-page-padding);
+  }
+
+  .brand {
+    min-width: 0;
+    gap: 0.55rem;
+  }
+
+  .brand-mark {
+    flex: 0 0 auto;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .brand > span {
+    min-width: 0;
+  }
+
+  .brand strong {
+    max-width: none;
+    font-size: 0.92rem;
+  }
+
+  .brand small {
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .menu-toggle {
+    display: inline-grid;
+    grid-column: 2;
+    grid-row: 1;
+    place-items: center;
+    min-width: 3.5rem;
+  }
+
+  .page-nav {
+    display: none;
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .page-nav.is-open {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-nav a {
+    justify-content: center;
+    min-width: 0;
+    min-height: 2.55rem;
+    padding-inline: 0.5rem;
+  }
+
+  .session-actions {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: auto;
+    grid-template-columns: 1fr;
+    justify-self: stretch;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .global-search {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .global-search input {
+    min-width: 0;
+  }
+
+  .global-search-results {
+    position: fixed;
+    top: 8.75rem;
+    left: var(--mobile-page-padding);
+    right: var(--mobile-page-padding);
+    width: auto;
+    max-height: 52vh;
+  }
+
+  .utility-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .utility-button,
+  .logout-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .page-status {
+    display: none;
+  }
+
+  .section-jump-nav {
+    position: static;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: none;
+    padding: 0.5rem var(--mobile-page-padding);
+    overflow: visible;
+  }
+
+  .section-jump-nav a {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  main {
+    gap: 1.25rem;
+    padding: var(--mobile-page-padding);
+    padding-top: 1rem;
+  }
+
+  .section {
+    min-width: 0;
+    max-width: 100%;
+    scroll-margin-top: 1rem;
+  }
+
+  .section-intro {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 1rem;
+    padding-block: 1rem;
+  }
+
+  h1 {
+    max-width: none;
+    line-height: 1.06;
+    word-break: keep-all;
+  }
+
+  .lead {
+    max-width: none;
+    font-size: 1rem;
+  }
+
+  .intro-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .primary-action,
+  .secondary-action {
+    width: 100%;
+  }
+
+  .pathway-figure {
+    width: 100%;
+  }
+
+  .dashboard-strip {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .category-map-header {
+    display: grid;
+    align-items: start;
+    gap: 0.45rem;
+  }
+
+  .dashboard-strip,
+  .category-map-grid,
+  .library-summary-grid,
+  .library-grid,
+  .library-controls,
+  .guideline-layout,
+  .section-split,
+  .product-grid,
+  .atc-grid,
+  .evidence-grid,
+  .dose-grid,
+  .competitor-grid,
+  .pico-grid,
+  .direct-study-grid,
+  .evidence-atlas-grid,
+  .claim-columns,
+  .tracker-grid,
+  .strategy-card-grid,
+  .war-room-grid,
+  .quality-grid,
+  .brief-grid,
+  .strategy-form,
+  .market-form,
+  .strategy-rows,
+  .market-metrics,
+  .claim-layout,
+  .publication-card,
+  .foundation-card-grid,
+  .mechanism-grid,
+  .statin-profile-grid,
+  .statin-price-grid,
+  .statin-timeline,
+  .fact-sheet-grid,
+  .fact-interpretation-grid,
+  .landmark-trial-grid,
+  .progress-shell,
+  .progress-grid,
+  .experience-grid,
+  .source-hub-grid,
+  .source-toolbar,
+  .source-archive-summary,
+  .script-generator,
+  .objection-card {
+    grid-template-columns: 1fr;
+  }
+
+  .section[data-category] > .section-heading {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .section[data-category] > .section-heading .eyebrow {
+    grid-row: auto;
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .detail-panel,
+  .calculator,
+  .case-simulator,
+  .quiz-card,
+  .dose-card,
+  .competitor-card,
+  .pico-card,
+  .deep-study-card,
+  .atlas-card,
+  .claim-card,
+  .objection-card,
+  .tracker-card,
+  .strategy-card,
+  .war-card,
+  .quality-card,
+  .brief-card,
+  .publication-card,
+  .foundation-card,
+  .mechanism-card,
+  .statin-profile-card,
+  .price-card,
+  .fact-metric-card,
+  .fact-interpretation-card,
+  .landmark-trial-card,
+  .experience-card,
+  .source-card,
+  .glossary-card {
+    min-width: 0;
+    padding: var(--card-padding-compact);
+  }
+
+  .mechanism-card,
+  .competitor-card,
+  .atlas-card,
+  .strategy-card,
+  .war-card,
+  .fact-metric-card {
+    min-height: auto;
+  }
+
+  .table-shell {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-shell table {
+    min-width: 42rem;
+  }
+
+  .definition-list,
+  .definition-list.compact,
+  .atlas-card .definition-list,
+  .quality-components {
+    grid-template-columns: 1fr;
+  }
+
+  .source-card .definition-list dd,
+  .source-archive-summary span,
+  .source-archive-summary strong,
+  .source-archive-status {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .source-archive-status {
+    justify-self: stretch;
+  }
+
+  .source-archive-summary {
+    justify-content: stretch;
+  }
+
+  .source-archive-summary span,
+  .source-archive-summary strong {
+    text-align: center;
+  }
+
+  .progress-item {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .progress-check {
+    grid-template-columns: max-content minmax(0, 1fr);
+  }
+
+  .progress-open {
+    width: 100%;
+    text-align: center;
+  }
+
+  .atlas-controls output,
+  .library-controls output {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .source-link {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .glossary-drawer {
+    width: 100vw;
+    padding: 1rem;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --text-hero: 2.08rem;
+    --text-xl: 1.22rem;
+    --text-lg: 1rem;
+  }
+
+  .brand strong {
+    font-size: 0.86rem;
+  }
+
+  .brand small {
+    font-size: 0.64rem;
+  }
+
+  .page-nav a {
+    padding-inline: 0.42rem;
+  }
+
+  .global-search-results {
+    top: 9.25rem;
+  }
+}

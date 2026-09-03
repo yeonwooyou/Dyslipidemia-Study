@@ -7,6 +7,7 @@ const readText = (path) => readFile(new URL(path, import.meta.url), "utf8");
 
 const loadExperienceData = async () => {
   const files = [
+    "../metadata-data.js",
     "../definition-data.js",
     "../mechanism-data.js",
     "../statin-profile-data.js",
@@ -17,6 +18,7 @@ const loadExperienceData = async () => {
     "../library-data.js",
     "../strategy-data.js",
     "../site-data.js",
+    "../source-data.js",
     "../experience-data.js"
   ];
   const context = { globalThis: {} };
@@ -35,11 +37,16 @@ test("experience shell adds search, source hub, glossary, and responsive control
 
   assert.equal(packageJson.scripts.test, "node --test tests/*.test.mjs");
   assert.match(html, /<link rel="stylesheet" href="experience\.css">/);
+  assert.match(html, /<script src="metadata-data\.js" defer><\/script>/);
+  assert.match(html, /<script src="source-data\.js" defer><\/script>/);
   assert.match(html, /<script src="experience-data\.js" defer><\/script>/);
   assert.match(html, /<script src="experience-tools\.js" defer><\/script>/);
+  assert.match(html, /id="contentVersionNote"/);
+  assert.match(html, /id="archiveVersionNote"/);
   assert.match(html, /data-page-link="sources"/);
   assert.match(html, /id="globalSearch"/);
   assert.match(html, /id="globalSearchResults"/);
+  assert.match(html, /aria-controls="globalSearchResults"/);
   assert.match(html, /id="viewModeToggle"/);
   assert.match(html, /id="glossaryToggle"/);
   assert.match(html, /id="sectionJumpNav"/);
@@ -48,14 +55,63 @@ test("experience shell adds search, source hub, glossary, and responsive control
   assert.match(html, /<section id="competitor-matrix"/);
   assert.match(html, /<section id="detail-script-generator"/);
   assert.match(html, /<section id="source-hub"/);
+  assert.match(html, /id="sourceCategoryFilter"/);
+  assert.match(html, /id="sourceArchiveSummary"/);
   assert.match(html, /id="glossaryDrawer"/);
+  assert.match(html, /role="dialog"/);
+  assert.match(html, /aria-modal="true"/);
   assert.match(css, /body\[data-view-mode="compact"\]/);
   assert.match(css, /\.global-search/);
   assert.match(css, /\.glossary-drawer/);
   assert.match(tools, /localStorage/);
   assert.match(tools, /dataset\.viewMode/);
   assert.match(tools, /sectionJumpNav/);
+  assert.match(tools, /lastActiveElement/);
+  assert.match(tools, /focusableElements/);
+  assert.match(tools, /renderMetadata/);
+  assert.match(tools, /renderSourceCategoryFilter/);
+  assert.match(tools, /getSourceItemsByFilters/);
+  assert.match(tools, /source-archive-status/);
   assert.doesNotMatch(tools, /innerHTML/);
+});
+
+test("metadata and source hub data are centralized for screen and archive use", async () => {
+  const files = [
+    "../metadata-data.js",
+    "../source-data.js",
+    "../experience-data.js"
+  ];
+  const context = { globalThis: {} };
+  vm.createContext(context);
+  for (const file of files) {
+    vm.runInContext(await readText(file), context);
+  }
+  const metadata = context.globalThis.SiteMetadata;
+  const sourceData = context.globalThis.SourceData;
+  const experience = context.globalThis.ExperienceData;
+  const readme = await readText("../README.md");
+
+  assert.equal(metadata.contentLastChecked, "2026-09-02");
+  assert.equal(metadata.siteUpdatedAt, "2026-09-03");
+  assert.equal(metadata.pageCount, 7);
+  assert.equal(experience.sourceHubItems, sourceData.sourceHubItems);
+  assert.equal(sourceData.getSourceItemsByStatus("follow-up").some((item) => item.title.includes("HIRA")), true);
+  assert.equal(sourceData.getSourceItemById("ksola-fact-2024").status, "found");
+  assert.equal(sourceData.getSourceItemById("ksola-fact-2024").archiveState, "local-file");
+  assert.match(sourceData.getSourceItemById("ksola-fact-2024").localArchivePath, /evidence_archive/);
+  assert.equal(Array.isArray(sourceData.getSourceItemById("ksola-fact-2024").extractionFocus), true);
+  assert.match(sourceData.getSourceItemById("eroica").sourceUrl, /41190361/);
+  assert.equal(sourceData.sourceCategoryOptions.some((item) => item.id === "Trial"), true);
+  assert.equal(sourceData.getSourceItemsByFilters({ status: "found", category: "Trial" }).some((item) => item.id === "racing"), true);
+  const uniqueLocalFileCount = new Set(sourceData.sourceHubItems
+    .filter((item) => item.archiveState === "local-file" && item.localArchivePath)
+    .map((item) => item.localArchivePath)).size;
+  assert.equal(sourceData.getArchiveSummary().localFileCount, uniqueLocalFileCount);
+  assert.match(readme, /7개 페이지/);
+  assert.match(readme, /metadata-data\.js/);
+  assert.match(readme, /source-data\.js/);
+  assert.match(readme, /experience-data\.js/);
+  assert.match(readme, /source intake/i);
 });
 
 test("experience data powers global search and source status tracking", async () => {

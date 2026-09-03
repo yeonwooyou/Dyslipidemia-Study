@@ -92,6 +92,7 @@ test("site shell uses external assets and CSP without unsafe-inline", async () =
   assert.match(html, /<link rel="stylesheet" href="foundation-learning\.css">/);
   assert.match(html, /<link rel="stylesheet" href="fact-sheet\.css">/);
   assert.match(html, /<link rel="stylesheet" href="landmark-trials\.css">/);
+  assert.match(html, /<link rel="stylesheet" href="mobile\.css">/);
   assert.match(html, /<script src="definition-data\.js" defer><\/script>/);
   assert.match(html, /<script src="mechanism-data\.js" defer><\/script>/);
   assert.match(html, /<script src="statin-profile-data\.js" defer><\/script>/);
@@ -143,6 +144,31 @@ test("site shell uses external assets and CSP without unsafe-inline", async () =
   assert.match(html, /<section id="evidence-atlas"/);
   assert.match(html, /<section id="library"/);
   assert.match(html, /<section id="quiz"/);
+});
+
+test("mobile stylesheet protects small screens from layout overflow", async () => {
+  const html = await readText("../index.html");
+  const css = await readText("../mobile.css");
+  const experienceIndex = html.indexOf('href="experience.css"');
+  const mobileIndex = html.indexOf('href="mobile.css"');
+
+  assert.equal(experienceIndex > -1, true);
+  assert.equal(mobileIndex > experienceIndex, true);
+  assert.match(css, /@media \(max-width: 760px\)/);
+  assert.match(css, /\.app-header\s*\{/);
+  assert.match(css, /grid-template-columns:\s*minmax\(0,\s*1fr\)\s*max-content/);
+  assert.match(css, /\.page-nav\.is-open\s*\{/);
+  assert.match(css, /\.session-actions\s*\{/);
+  assert.match(css, /\.global-search-results\s*\{/);
+  assert.match(css, /position:\s*fixed/);
+  assert.match(css, /\.section-jump-nav\s*\{/);
+  assert.match(css, /flex-wrap:\s*wrap/);
+  assert.match(css, /\.section-intro\s*\{/);
+  assert.match(css, /grid-template-columns:\s*1fr/);
+  assert.match(css, /\.table-shell\s*\{/);
+  assert.match(css, /overflow-x:\s*auto/);
+  assert.match(css, /overflow-wrap:\s*anywhere/);
+  assert.match(css, /\.statin-price-grid/);
 });
 
 test("KSoLA 2024 fact sheet module captures epidemiology and PM interpretation", async () => {
@@ -290,7 +316,7 @@ test("evidence archive documents currently used guidelines and papers", async ()
   const landmarks = await readText("../evidence_archive/landmark_trials.md");
   const rosuzet = await readText("../evidence_archive/rosuzet_and_nonstatin_evidence.md");
 
-  assert.match(archiveReadme, /PDF 원문을 복제하지 않는다/);
+  assert.match(archiveReadme, /로컬 원문 파일은 공개 배포물에 자동 포함하지 않는다/);
   assert.match(archiveReadme, /last checked/);
   assert.match(guidelines, /Dyslipidemia Fact Sheet 2024/);
   assert.match(guidelines, /KSoLA/);
@@ -317,6 +343,20 @@ test("evidence archive documents currently used guidelines and papers", async ()
   assert.match(rosuzet, /FOURIER/);
   assert.match(rosuzet, /REDUCE-IT/);
   assert.match(rosuzet, /claim guardrail/);
+});
+
+test("paper search CSV expands abbreviations into searchable titles", async () => {
+  const csv = await readText("../evidence_archive/paper_search_list.csv");
+
+  assert.match(csv, /search_title/);
+  assert.match(csv, /Long-term efficacy and safety of moderate-intensity statin with ezetimibe combination therapy/);
+  assert.match(csv, /Efficacy and safety of switching to ezetimibe 10/);
+  assert.match(csv, /Dyslipidemia Fact Sheet in South Korea, 2024/);
+  assert.match(csv, /RACING diabetes subgroup 원논문 탐색/);
+  assert.match(csv, /현재 사이트 링크 수정 필요/);
+  assert.match(csv, /"MRS-ROZE".*"local-file","evidence_archive\/Paper\/3\. MRS-ROZE\.pdf"/);
+  assert.match(csv, /41190361/);
+  assert.match(csv, /NCT04700436/);
 });
 
 test("login gate blocks the app shell until CVD1 credentials are entered", async () => {
@@ -543,9 +583,12 @@ test("evidence atlas includes EROICA and broad dyslipidemia landmark evidence", 
   assert.equal(ids.has("reduce-it"), true);
 
   const eroica = getEvidenceById("eroica");
+  const racingDiabetes = getEvidenceById("racing-diabetes");
   assert.equal(eroica.productRelevance, "direct");
   assert.match(eroica.pmUse, /T2DM/);
   assert.match(eroica.limitations, /publication|출처|확인/i);
+  assert.match(racingDiabetes.sourceUrl, /RACING\+trial\+diabetes/);
+  assert.doesNotMatch(racingDiabetes.sourceUrl, /PMC12428817/);
 });
 
 test("direct study deep dives separate publication grade from claim use", async () => {
@@ -601,6 +644,8 @@ test("statin evidence extension adds broad class trial coverage", async () => {
 
   assert.match(getEvidenceById("jupiter").intervention, /Rosuvastatin 20 mg/);
   assert.match(getEvidenceById("sattar-diabetes-meta").limitations, /diabetes/i);
+  assert.match(getEvidenceById("lips").sourceUrl, /12076217/);
+  assert.match(getEvidenceById("stomp").sourceUrl, /23183941/);
   assert.equal(getEvidenceByCategory("statin-intensive-strategy").some((study) => study.id === "prove-it"), true);
 });
 

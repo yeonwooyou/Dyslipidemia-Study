@@ -7,28 +7,18 @@ const ExperienceData = (() => {
   const study = globalThis.StudyData || {};
   const library = globalThis.LibraryData || {};
   const strategy = globalThis.StrategyData || {};
+  const sourceData = globalThis.SourceData || {
+    getArchiveSummary: () => ({ followUpCount: 0, linkedOnlyCount: 0, localFileCount: 0, neededCount: 0, p0Count: 0, totalCount: 0 }),
+    getSourceItemsByFilters: () => [],
+    getSourceItemsByStatus: () => [],
+    sourceCategoryOptions: [],
+    sourceHubItems: [],
+    sourceStatusOptions: []
+  };
 
-  const sourceStatusOptions = [
-    { id: "all", label: "All" },
-    { id: "found", label: "Found" },
-    { id: "follow-up", label: "Follow-up" }
-  ];
-
-  const sourceHubItems = [
-    source("ksola-fact-2024", "Dyslipidemia Fact Sheet 2024 (KSoLA)", "found", "역학", "KNHANES/NHIS 기반 국내 prevalence, awareness, treatment, control funnel.", "Fact Sheet 수치와 시장 sizing 가정을 연결한다.", "https://pmc.ncbi.nlm.nih.gov/articles/PMC12488789/"),
-    source("ksola-guideline-2022", "KSoLA 2022 제5판 진료지침", "found", "지침", "국내 LDL-C target, 위험군, nonstatin add-on의 기준 축.", "국내 자료의 1차 backbone으로 둔다.", "https://new.lipid.or.kr/reference/guideline.php?boardid=guideline&category=&idx=1281&mode=view"),
-    source("esc-eas-2025", "ESC/EAS 2025 Focused Update", "found", "지침", "Lp(a), CAC, 조기 intensification, newer LLT 업데이트.", "글로벌 KOL discussion과 지침 diff에 사용한다.", "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/dyslipidaemias/"),
-    source("acc-aha-2026", "ACC/AHA 2026 Dyslipidemia Guideline", "found", "지침", "LDL-C/non-HDL-C target, PREVENT, ApoB/Lp(a), newer LLT 반영.", "KSoLA와 미국식 threshold/target language를 구분한다.", "https://professional.heart.org/en/science-news/2026-guideline-on-the-management-of-dyslipidemia"),
-    source("who-atc-c10ba06", "WHO ATC C10BA06 rosuvastatin and ezetimibe", "found", "분류", "로수젯 성분 조합의 공식 ATC 코드.", "C10C 시장분류와 혼동하지 않게 자료 첫 장에 둔다.", "https://atcddd.fhi.no/atc_ddd_index/?code=C10BA06"),
-    source("racing", "RACING trial", "found", "Trial", "한국 ASCVD 환자에서 rosuvastatin 10 mg+ezetimibe 10 mg 전략과 rosuvastatin 20 mg 비교.", "로수젯 10/10 mg 인접 strategy 근거로 사용하되 브랜드 outcome claim은 제한한다.", "https://pubmed.ncbi.nlm.nih.gov/35863366/"),
-    source("improve-it", "IMPROVE-IT", "found", "Trial", "ACS 이후 simvastatin+ezetimibe가 simvastatin 대비 LDL-C 추가 저하와 outcome 개선을 보인 class anchor.", "ezetimibe outcome class 근거로 사용하고 rosuvastatin/ezetimibe 직접 근거와 분리한다.", "https://pubmed.ncbi.nlm.nih.gov/26039521/"),
-    source("eroica", "EROICA rosuvastatin/ezetimibe FDC", "found", "Trial", "T2DM 환자 switch-in lipid endpoint 중심 직접성 높은 근거 후보.", "내분비 segment에서 lipid efficacy 근거로 쓰며 outcome claim은 피한다.", "https://pubmed.ncbi.nlm.nih.gov/?term=EROICA+rosuvastatin+ezetimibe"),
-    source("hira-2026-price", "HIRA September 2026 약제급여목록", "follow-up", "가격", "현재 사이트의 급여가격 snapshot을 최신 고시 원문과 대조해야 한다.", "가격표 외부 사용 전 제품코드, 적용일, 상한금액을 재확인한다.", "https://www.hira.or.kr/"),
-    source("ksola-pdf-direct", "KSoLA Fact Sheet PDF 원문 파일", "follow-up", "아카이브", "공식 PDF 직접 링크와 파일명, 발간일, 표 번호를 로컬 archive index에 매핑한다.", "PDF 복제 없이 링크/확인일만 관리한다.", "https://www.lipid.or.kr/"),
-    source("rembrandt-full", "REMBRANDT publication/results", "follow-up", "Trial", "mixed dyslipidemia와 diabetes segment에서 결과 공개 여부를 추적한다.", "학회 발표와 논문화 상태를 분리해 claim 등급을 조정한다.", "https://clinicaltrials.gov/"),
-    source("easy-rosuzet", "EASY-ROSUZET study source trail", "follow-up", "Trial", "회사 발표 중심 자산의 등록번호, 논문, 세부 대상자 정의를 추적한다.", "브랜드 자료에 넣을 수 있는 source grade를 확정한다.", "https://pubmed.ncbi.nlm.nih.gov/?term=EASY-ROSUZET"),
-    source("racing-subgroups", "RACING subgroup papers", "follow-up", "Trial", "very-high-risk, PCI, diabetes, elderly subgroup의 interaction과 한계를 세그먼트별로 정리한다.", "심장내과/내분비/고령 계정별 objection 카드로 재배치한다.", "https://pubmed.ncbi.nlm.nih.gov/?term=RACING+trial+ezetimibe+subgroup")
-  ];
+  const sourceHubItems = sourceData.sourceHubItems;
+  const sourceStatusOptions = sourceData.sourceStatusOptions;
+  const sourceCategoryOptions = sourceData.sourceCategoryOptions;
 
   const guidelineSegmentDiffs = [
     segment("ASCVD", "CAD 초고위험은 <55 mg/dL + 50% 이상 감소, 그 외 ASCVD 고위험은 <70 mg/dL 축.", "Very-high-risk는 <55 mg/dL + 50% 이상 감소, 조기 병용 강화 흐름.", "Very-high-risk ASCVD는 LDL-C <55 mg/dL, non-HDL-C <85 mg/dL.", "baseline LDL-C gap, RACING, 10/10 mg 전략을 먼저 연결한다."),
@@ -105,10 +95,6 @@ const ExperienceData = (() => {
     monthlyCostWon: item.ceilingPriceWon * 30
   }));
 
-  function source(id, title, status, category, summary, pmUse, sourceUrl) {
-    return { category, id, pmUse, sourceUrl, status, summary, title };
-  }
-
   function segment(segmentName, ksola, esc, acc, pmAction) {
     return { acc, esc, ksola, pmAction, segment: segmentName };
   }
@@ -164,7 +150,7 @@ const ExperienceData = (() => {
     ...entriesFrom("Library", library.libraryModules, (item) => ({ href: "#library", keywords: [item.learn, item.pmUse, item.sourceNote, item.category], summary: item.summary, title: item.title })),
     ...entriesFrom("Segment", guidelineSegmentDiffs, (item) => ({ href: "#guideline-segment-diff", keywords: [item.ksola, item.esc, item.acc, item.pmAction], summary: item.pmAction, title: item.segment })),
     ...entriesFrom("Competitor", competitorMatrix, (item) => ({ href: "#competitor-matrix", keywords: [item.examples, item.threat, item.response, item.guardrail], summary: item.response, title: item.className })),
-    ...entriesFrom("Source", sourceHubItems, (item) => ({ href: "#source-hub", keywords: [item.category, item.status, item.pmUse, item.sourceUrl], summary: item.summary, title: item.title })),
+    ...entriesFrom("Source", sourceHubItems, (item) => ({ href: "#source-hub", keywords: [item.category, item.status, item.pmUse, item.sourceUrl, item.archiveState, item.localArchivePath, item.priority, item.extractionFocus], summary: item.summary, title: item.title })),
     ...entriesFrom("Glossary", glossaryTerms, (item) => ({ href: "#library", keywords: [item.category], summary: item.definition, title: item.term })),
     ...entriesFrom("War Room", strategy.competitorWarRoom, (item) => ({ href: "#war-room", keywords: [item.examples, item.threat, item.response, item.watch], summary: item.response, title: item.group })),
     ...entriesFrom("Objection", strategy.trainingScenarios, (item) => ({ href: "#objection-training", keywords: [item.answer, item.guardrail], summary: item.answer, title: item.prompt }))
@@ -178,13 +164,9 @@ const ExperienceData = (() => {
     return searchIndex.filter((item) => tokens.every((token) => item.searchText.includes(token))).slice(0, 30);
   };
 
-  const getSourceItemsByStatus = (status) => {
-    if (!status || status === "all") {
-      return [...sourceHubItems];
-    }
-    return sourceHubItems.filter((item) => item.status === status);
-  };
-
+  const getSourceItemsByStatus = (status) => sourceData.getSourceItemsByStatus(status);
+  const getSourceItemsByFilters = (filters) => sourceData.getSourceItemsByFilters(filters);
+  const getArchiveSummary = () => sourceData.getArchiveSummary();
   const getPriceComparatorById = (id) => priceComparatorRows.find((item) => item.id === id);
   const getGlossaryTerm = (label) => glossaryTerms.find((item) => normalize(item.term) === normalize(label));
 
@@ -203,8 +185,10 @@ const ExperienceData = (() => {
   return {
     buildDetailScript,
     competitorMatrix,
+    getArchiveSummary,
     getGlossaryTerm,
     getPriceComparatorById,
+    getSourceItemsByFilters,
     getSourceItemsByStatus,
     glossaryTerms,
     guidelineSegmentDiffs,
@@ -214,6 +198,7 @@ const ExperienceData = (() => {
     scriptSegments,
     searchAll,
     searchIndex,
+    sourceCategoryOptions,
     sourceHubItems,
     sourceStatusOptions
   };

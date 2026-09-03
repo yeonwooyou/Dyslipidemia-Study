@@ -1,8 +1,11 @@
 (() => {
   const data = globalThis.ExperienceData;
+  const metadata = globalThis.SiteMetadata || {};
   const PROGRESS_KEY = "rosuzet-learning-progress-v1";
   const VIEW_MODE_KEY = "rosuzet-view-mode-v1";
+  let activeSourceCategory = "all";
   let activeSourceStatus = "all";
+  let lastActiveElement = null;
 
   const select = (selector) => document.querySelector(selector);
   const selectAll = (selector) => [...document.querySelectorAll(selector)];
@@ -48,6 +51,17 @@
     const nodes = items.flatMap(([term, detail]) => [element("dt", { text: term }), element("dd", { text: detail })]);
     root.replaceChildren(...nodes);
     return root;
+  };
+
+  const renderMetadata = () => {
+    const versionNote = select("#contentVersionNote");
+    const archiveNote = select("#archiveVersionNote");
+    if (versionNote && metadata.formatHeaderNote) {
+      versionNote.textContent = metadata.formatHeaderNote();
+    }
+    if (archiveNote && metadata.formatArchiveNote) {
+      archiveNote.textContent = metadata.formatArchiveNote();
+    }
   };
 
   const renderGlobalSearchResults = (query) => {
@@ -111,23 +125,80 @@
     root.replaceChildren(...buttons);
   };
 
+  const renderSourceCategoryFilter = () => {
+    const selectNode = select("#sourceCategoryFilter");
+    if (!selectNode || !data) {
+      return;
+    }
+    fillSelect(selectNode, data.sourceCategoryOptions);
+    selectNode.value = activeSourceCategory;
+    selectNode.addEventListener("change", (event) => {
+      activeSourceCategory = event.target.value;
+      renderSourceHub();
+    });
+  };
+
+  const getArchiveLabel = (item) => {
+    if (item.archiveState === "local-file") {
+      return "Local file archived";
+    }
+    if (item.archiveState === "linked-only") {
+      return "Linked source only";
+    }
+    return "Source still needed";
+  };
+
+  const getArchiveDetail = (item) => {
+    if (item.localArchivePath) {
+      return item.localArchivePath;
+    }
+    return getArchiveLabel(item);
+  };
+
+  const renderSourceArchiveSummary = () => {
+    const root = select("#sourceArchiveSummary");
+    if (!root || !data) {
+      return;
+    }
+    const summary = data.getArchiveSummary();
+    root.replaceChildren(
+      element("span", { text: `${summary.totalCount} tracked` }),
+      element("strong", { text: `${summary.localFileCount} local files` }),
+      element("span", { text: `${summary.neededCount} still needed` }),
+      element("span", { text: `${summary.p0Count} P0` })
+    );
+  };
+
   const renderSourceHub = () => {
     const grid = select("#sourceHubGrid");
     const count = select("#sourceHubCount");
     if (!grid || !data) {
       return;
     }
-    const items = data.getSourceItemsByStatus(activeSourceStatus);
+    const items = data.getSourceItemsByFilters({
+      category: activeSourceCategory,
+      status: activeSourceStatus
+    });
     if (count) {
       count.textContent = `${items.length} sources`;
     }
     const cards = items.map((item) => {
-      const card = element("article", { className: `source-card source-${item.status}` });
+      const archiveStatus = element("span", {
+        className: "source-archive-status",
+        text: getArchiveLabel(item)
+      });
+      const card = element("article", { className: `source-card source-${item.status} source-${item.archiveState}` });
       card.replaceChildren(
         element("span", { className: "source-status", text: `${item.status} · ${item.category}` }),
+        archiveStatus,
         element("h3", { text: item.title }),
         element("p", { text: item.summary }),
-        definitionList([["PM 적용", item.pmUse]]),
+        definitionList([
+          ["PM 적용", item.pmUse],
+          ["Archive", getArchiveDetail(item)],
+          ["Priority", item.priority],
+          ["Next extraction", item.extractionFocus.join(" · ")]
+        ]),
         element("a", { className: "source-link", href: item.sourceUrl, text: "출처 확인" })
       );
       return card;
@@ -223,8 +294,10 @@
     }
     const completed = new Set(readStorage(PROGRESS_KEY, []));
     const items = data.progressModules.map((module) => {
-      const label = element("label", { className: "progress-item" });
+      const card = element("article", { className: "progress-item" });
+      const label = element("label", { className: "progress-check" });
       const checkbox = element("input");
+      checkbox.id = `progress-${module.id}`;
       checkbox.type = "checkbox";
       checkbox.checked = completed.has(module.id);
       checkbox.addEventListener("change", () => {
@@ -237,10 +310,13 @@
         writeStorage(PROGRESS_KEY, [...nextCompleted]);
         renderLearningProgress();
       });
-      const link = element("a", { href: module.href, text: module.title });
+      const title = element("span", { className: "progress-title", text: module.title });
       const page = element("span", { text: module.page });
-      label.replaceChildren(checkbox, link, page);
-      return label;
+      const link = element("a", { className: "progress-open", href: module.href, text: "Open" });
+      label.setAttribute("for", checkbox.id);
+      label.replaceChildren(checkbox, title);
+      card.replaceChildren(label, page, link);
+      return card;
     });
     if (count) {
       count.textContent = `${completed.size} / ${data.progressModules.length}`;
@@ -270,6 +346,50 @@
     root.replaceChildren(...cards);
   };
 
+  const getFocusableElements = (root) => {
+    const focusableElements = [
+      ...root.querySelectorAll("a[href], button, input, select, textarea, [tabindex]")
+    ].filter((node) => !node.disabled && node.tabIndex !== -1 && !node.hidden);
+    return focusableElements;
+  };
+
+  const closeGlossary = (drawer) => {
+    drawer.classList.remove("is-open");
+    drawer.hidden = true;
+    drawer.setAttribute("aria-hidden", "true");
+    lastActiveElement?.focus();
+  };
+
+  const openGlossary = (drawer, search) => {
+    lastActiveElement = document.activeElement;
+    drawer.hidden = false;
+    drawer.classList.add("is-open");
+    drawer.setAttribute("aria-hidden", "false");
+    renderGlossaryTerms(search.value);
+    search.focus();
+  };
+
+  const focusTrap = (event, drawer) => {
+    if (event.key !== "Tab" || drawer.hidden) {
+      return;
+    }
+    const focusableElements = getFocusableElements(drawer);
+    const first = focusableElements[0];
+    const last = focusableElements[focusableElements.length - 1];
+    if (!first || !last) {
+      return;
+    }
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+      return;
+    }
+    if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
   const bindGlossary = () => {
     const drawer = select("#glossaryDrawer");
     const openButton = select("#glossaryToggle");
@@ -278,22 +398,15 @@
     if (!drawer || !openButton || !closeButton || !search) {
       return;
     }
-    openButton.addEventListener("click", () => {
-      drawer.hidden = false;
-      drawer.classList.add("is-open");
-      renderGlossaryTerms(search.value);
-      search.focus();
-    });
-    closeButton.addEventListener("click", () => {
-      drawer.classList.remove("is-open");
-      drawer.hidden = true;
-    });
+    openButton.addEventListener("click", () => openGlossary(drawer, search));
+    closeButton.addEventListener("click", () => closeGlossary(drawer));
     search.addEventListener("input", (event) => renderGlossaryTerms(event.target.value));
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && !drawer.hidden) {
-        drawer.classList.remove("is-open");
-        drawer.hidden = true;
+        closeGlossary(drawer);
+        return;
       }
+      focusTrap(event, drawer);
     });
     renderGlossaryTerms();
   };
@@ -331,12 +444,15 @@
     if (!data) {
       return;
     }
+    renderMetadata();
     bindGlobalSearch();
     bindScriptGenerator();
     bindGlossary();
     bindViewMode();
     renderLearningProgress();
     renderSourceFilters();
+    renderSourceCategoryFilter();
+    renderSourceArchiveSummary();
     renderSourceHub();
     renderGuidelineSegmentDiff();
     renderCompetitorMatrix();

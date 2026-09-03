@@ -138,6 +138,7 @@
 
 .progress-shell,
 .source-toolbar,
+.source-archive-summary,
 .script-generator {
   display: grid;
   gap: var(--component-gap);
@@ -183,7 +184,7 @@
 
 .progress-item {
   display: grid;
-  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  grid-template-columns: minmax(0, 1fr) max-content max-content;
   gap: 0.55rem;
   align-items: center;
   min-height: 3rem;
@@ -193,12 +194,31 @@
   background: var(--color-surface);
 }
 
+.progress-check {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: center;
+  min-width: 0;
+  cursor: pointer;
+}
+
 .progress-item input {
   width: 1.05rem;
   height: 1.05rem;
 }
 
-.progress-item a {
+.progress-title {
+  color: var(--color-ink);
+  font-weight: 820;
+  line-height: 1.25;
+}
+
+.progress-open {
+  padding: 0.32rem 0.55rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--experience-green), white 88%);
   color: var(--color-ink);
   font-weight: 820;
   line-height: 1.25;
@@ -237,8 +257,22 @@
 }
 
 .source-toolbar {
-  grid-template-columns: minmax(0, 1fr) max-content;
+  grid-template-columns: minmax(0, 1fr) minmax(11rem, 16rem) max-content;
   align-items: center;
+}
+
+.source-category-filter {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.source-category-filter select {
+  min-height: 2.45rem;
+  padding-block: 0.45rem;
 }
 
 .source-toolbar output {
@@ -250,10 +284,44 @@
   font-weight: 850;
 }
 
+.source-archive-summary {
+  grid-template-columns: repeat(4, max-content);
+  align-items: center;
+  justify-content: start;
+  margin-top: var(--space-3);
+  padding-block: 0.68rem;
+  box-shadow: none;
+}
+
+.source-archive-summary span,
+.source-archive-summary strong {
+  padding: 0.36rem 0.58rem;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-canvas), white 28%);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  font-weight: 820;
+}
+
+.source-archive-summary strong {
+  background: color-mix(in oklch, var(--experience-green), white 84%);
+  color: var(--color-ink);
+}
+
 .source-card p,
 .glossary-card p {
   margin: 0;
   color: var(--color-muted);
+}
+
+.source-archive-status {
+  width: max-content;
+  padding: 0.28rem 0.48rem;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-canvas), white 18%);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  font-weight: 820;
 }
 
 .source-found {
@@ -262,6 +330,21 @@
 
 .source-follow-up {
   border-left: 5px solid var(--experience-red);
+}
+
+.source-local-file .source-archive-status {
+  background: color-mix(in oklch, var(--experience-green), white 82%);
+  color: var(--color-ink);
+}
+
+.source-linked-only .source-archive-status {
+  background: color-mix(in oklch, var(--experience-blue), white 86%);
+  color: var(--color-ink);
+}
+
+.source-needed .source-archive-status {
+  background: color-mix(in oklch, var(--experience-red), white 86%);
+  color: var(--color-ink);
 }
 
 .script-generator {
@@ -328,6 +411,13 @@
   gap: 0.75rem;
 }
 
+.archive-version-note {
+  margin: 0.3rem 0 0;
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  font-weight: 760;
+}
+
 .landmark-pico {
   padding: 0.75rem;
   border: 1px dashed var(--color-line);
@@ -386,6 +476,7 @@ body[data-view-mode="compact"] .library-card {
 @media (max-width: 920px) {
   .progress-shell,
   .script-generator,
+  .source-archive-summary,
   .source-toolbar {
     grid-template-columns: 1fr;
   }

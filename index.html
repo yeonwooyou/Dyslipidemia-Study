@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="fact-sheet.css">
     <link rel="stylesheet" href="landmark-trials.css">
     <link rel="stylesheet" href="experience.css">
+    <link rel="stylesheet" href="mobile.css">
+    <script src="metadata-data.js" defer></script>
     <script src="definition-data.js" defer></script>
     <script src="mechanism-data.js" defer></script>
     <script src="statin-profile-data.js" defer></script>
@@ -30,6 +32,7 @@
     <script src="library-data.js" defer></script>
     <script src="strategy-data.js" defer></script>
     <script src="site-data.js" defer></script>
+    <script src="source-data.js" defer></script>
     <script src="experience-data.js" defer></script>
     <script src="script.js" defer></script>
     <script src="foundation-learning.js" defer></script>
@@ -68,7 +71,7 @@
         <span class="brand-mark" aria-hidden="true">RZ</span>
         <span>
           <strong>Rosuzet PM Study Console</strong>
-          <small>작성 기준 2026-08-31</small>
+          <small id="contentVersionNote">검증 기준 2026-09-02</small>
         </span>
       </a>
       <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="pageNav">
@@ -86,7 +89,7 @@
       <div class="session-actions">
         <form class="global-search" role="search" aria-label="전체 학습자료 검색">
           <label for="globalSearch">Search</label>
-          <input id="globalSearch" type="search" autocomplete="off" placeholder="RACING, ApoB, 급여">
+          <input id="globalSearch" type="search" autocomplete="off" aria-controls="globalSearchResults" placeholder="RACING, ApoB, 급여">
           <div id="globalSearchResults" class="global-search-results" hidden></div>
         </form>
         <div class="utility-actions" aria-label="학습 보기 설정">
@@ -617,13 +620,18 @@
         </div>
         <div class="source-toolbar">
           <div id="sourceStatusFilter" class="segmented-control" role="group" aria-label="Source status filter"></div>
+          <label class="source-category-filter">
+            Category
+            <select id="sourceCategoryFilter" aria-label="Source category filter"></select>
+          </label>
           <output id="sourceHubCount" aria-live="polite"></output>
         </div>
+        <div id="sourceArchiveSummary" class="source-archive-summary" aria-live="polite"></div>
         <div id="sourceHubGrid" class="source-hub-grid"></div>
       </section>
     </main>
 
-    <aside id="glossaryDrawer" class="glossary-drawer" data-auth-content hidden aria-labelledby="glossary-title">
+    <aside id="glossaryDrawer" class="glossary-drawer" data-auth-content hidden role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1" aria-labelledby="glossary-title">
       <div class="glossary-header">
         <div>
           <p class="eyebrow">Glossary</p>
@@ -642,6 +650,7 @@
       <div>
         <strong>주의</strong>
         <p>이 사이트는 PM 학습용 구조화 자료다. 개별 환자의 진단·치료 의사결정은 허가사항, 최신 지침, 전문의 판단을 따른다.</p>
+        <p id="archiveVersionNote" class="archive-version-note"></p>
       </div>
       <nav id="sourceLinks" aria-label="주요 출처"></nav>
     </footer>

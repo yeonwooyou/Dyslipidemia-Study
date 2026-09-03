@@ -195,9 +195,9 @@ const StudyEvidence = (() => {
       endpoint: "LDL-C <70 mg/dL and composite outcome",
       result: "Reviews and subgroup reports describe higher LDL-C goal attainment with comparable clinical outcomes.",
       pmUse: "T2DM + ASCVD에서 RACING과 EROICA를 연결.",
-      limitations: "Subgroup source 확인과 원논문 citation mapping 필요.",
+      limitations: "Subgroup source 확인과 원논문 citation mapping 필요. 기존 PMC12428817 링크는 T1DM review로 확인되어 사용하지 않는다.",
       sourceTier: "B",
-      sourceUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12428817/"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=RACING+trial+diabetes+ezetimibe+rosuvastatin+atherosclerotic+cardiovascular+disease"
     },
     {
       id: "i-rosette",
@@ -333,7 +333,7 @@ const StudyEvidence = (() => {
       pmUse: "LDL-C lowering claim이 모든 질환 progression claim으로 확장되지 않음을 교육.",
       limitations: "Aortic stenosis population, not dyslipidemia target-attainment setting.",
       sourceTier: "A",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/20425166/"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/18765433/"
     },
     {
       id: "ctt-2005",
@@ -401,7 +401,7 @@ const StudyEvidence = (() => {
       pmUse: "ACS에서 early and intensive lipid lowering의 역사적 근거.",
       limitations: "Statin intensity comparison, not combination strategy.",
       sourceTier: "A",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/16356805/"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/15007110/"
     },
     {
       id: "tnt",

@@ -1,12 +1,17 @@
 # Rosuzet PM Learning Pack
 
-작성일: 2026-08-31
+작성일: 2026-08-31<br>
+최근 사이트 업데이트: 2026-09-03
 
 이 폴더는 로수젯 PM 관점에서 이상지질혈증, 로수젯, ATC 분류, 임상근거, 시장 구조를 빠르게 학습하기 위한 작업 문서다. 의학적 처방 지침이 아니라 제품/시장/근거 이해를 위한 내부 학습 구조다.
 
 ## 문서 구성
 
-- [index.html](index.html): 로수젯/이상지질혈증 학습용 정적 웹사이트. `Home`, `Foundation`, `Strategy`, `Evidence`, `Execution`, `Library` 페이지 탭으로 나눠 클릭한 영역만 보이도록 구성
+- [index.html](index.html): 로수젯/이상지질혈증 학습용 정적 웹사이트. `Home`, `Foundation`, `Strategy`, `Evidence`, `Execution`, `Library`, `Sources` 7개 페이지 탭으로 나눠 클릭한 영역만 보이도록 구성
+- [metadata-data.js](metadata-data.js): 콘텐츠 검증일, archive 확인일, 가격 확인일, 사이트 버전, 페이지 수를 한 곳에서 관리
+- [source-data.js](source-data.js): Source Hub의 found/follow-up 원문, 카테고리 필터, 로컬 아카이브 상태, 다음 추출 항목의 단일 데이터 소스
+- [experience-data.js](experience-data.js): 전역 검색 인덱스, 환자군별 지침 diff, 경쟁 매트릭스, detail script, progress, glossary 데이터
+- [experience-tools.js](experience-tools.js): 전역 검색, Source Hub, compact view, glossary drawer, 학습 진행판 렌더링
 - [library-data.js](library-data.js): 지질 기초, 위험도, 지침 workflow, 치료 전략, 안전성, 특수 환자, 시장/분류, field execution, 논문 독해, 용어 사전까지 10개 카테고리와 53개 심화 학습 모듈
 - [definition-data.js](definition-data.js): 이상지질혈증 정의, 지질 항목, 표현형, 원발성/이차성, 위험도 기반 치료 구조
 - [mechanism-data.js](mechanism-data.js): statin HMG-CoA reductase 억제, LDL receptor upregulation, rule of six, ezetimibe 보완 기전
@@ -28,7 +33,7 @@
 
 디자인은 외부 font 의존 없이 `theme-refresh.css`에서 local/system sans stack으로 바꿨다. 기존 serif-heavy headline 대신 `Avenir Next`, `Pretendard`, `Apple SD Gothic Neo`, `Noto Sans KR` 순서로 읽히게 했다.
 
-가시성 개선은 `layout-refresh.css`와 `pages.css`에서 관리한다. 상단 navigation은 6개 페이지 탭으로 줄였고, 모바일에서는 메뉴 버튼으로 접힌다. 각 섹션은 `data-page`로 배정되어 선택한 페이지의 내용만 표시된다.
+가시성 개선은 `layout-refresh.css`, `pages.css`, `experience.css`에서 관리한다. 상단 navigation은 7개 페이지 탭으로 구성했고, 모바일에서는 메뉴 버튼으로 접힌다. 각 섹션은 `data-page`로 배정되어 선택한 페이지의 내용만 표시된다.
 
 ## 로그인 게이트
 
@@ -37,6 +42,12 @@
 ## 근거 아카이브
 
 [evidence_archive](evidence_archive)는 PDF 원문을 복제하지 않고 공식/JLA/PubMed/PMC/HIRA 기반 링크와 확인 상태만 보관한다. 2026-09-02 기준 원문 확인 목록과 못 찾은 항목은 [source_inventory.md](evidence_archive/source_inventory.md)에 정리했다. 급여가격은 HIRA 최신 약제급여목록 및 급여상한금액표의 적용일이 바뀔 수 있으므로 외부 자료로 쓰기 전 최신 고시 원문 재확인이 필요하다.
+
+논문 원문을 직접 찾을 때는 [paper_search_list.csv](evidence_archive/paper_search_list.csv)를 먼저 쓴다. 약어를 전체 논문 제목, PMID/DOI/NCT, 우선순위, 찾아야 할 원문 형태로 풀어둬서 Excel에서 바로 필터링할 수 있다.
+
+## Source Intake
+
+새 원문을 넣을 때는 [source-data.js](source-data.js)에 `archiveState`, `priority`, `localArchivePath`, `extractionFocus`를 먼저 추가한다. 그 다음 [evidence_archive/source_inventory.md](evidence_archive/source_inventory.md)에 원문 보유 여부와 다음 액션을 맞춰 적고, 실제 수치나 claim guardrail을 추출한 뒤 관련 데이터 파일에 반영한다.
 
 ## Netlify 배포
 
