@@ -8,16 +8,22 @@
 }
 
 .session-actions {
+  grid-area: actions;
+  display: grid;
+  grid-template-columns: minmax(14rem, 20rem) max-content max-content max-content;
   align-items: center;
   gap: 0.55rem;
+  justify-self: end;
+  min-width: 0;
 }
 
 .global-search {
   position: relative;
   display: grid;
-  grid-template-columns: max-content minmax(12rem, 16rem);
+  grid-template-columns: max-content minmax(0, 1fr);
   align-items: center;
   gap: 0.42rem;
+  min-width: 0;
 }
 
 .global-search label,
@@ -30,6 +36,7 @@
 
 .global-search input {
   width: 100%;
+  min-width: 0;
   min-height: 2.45rem;
   padding: 0 0.75rem;
   border: 1px solid var(--color-line);
@@ -52,6 +59,11 @@
   border-radius: var(--radius);
   background: var(--color-surface);
   box-shadow: var(--shadow-panel);
+}
+
+.global-search-results[hidden],
+.glossary-drawer[hidden] {
+  display: none !important;
 }
 
 .search-result {
@@ -84,7 +96,8 @@
 }
 
 .utility-actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
   align-items: center;
   gap: 0.35rem;
 }
@@ -106,8 +119,10 @@
   top: 4.25rem;
   z-index: 9;
   display: flex;
+  justify-content: center;
   gap: 0.35rem;
-  max-width: 1180px;
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
   padding: 0.55rem var(--space-8);
   overflow-x: auto;
@@ -460,8 +475,7 @@ body[data-view-mode="compact"] .library-card {
 
 @media (max-width: 1180px) {
   .session-actions {
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    grid-template-columns: minmax(13rem, 18rem) max-content max-content;
   }
 
   .global-search {
@@ -470,6 +484,10 @@ body[data-view-mode="compact"] .library-card {
 
   .global-search label {
     display: none;
+  }
+
+  .section-jump-nav {
+    justify-content: flex-start;
   }
 }
 
@@ -491,6 +509,8 @@ body[data-view-mode="compact"] .library-card {
 @media (max-width: 760px) {
   .session-actions {
     align-items: stretch;
+    grid-template-columns: 1fr;
+    justify-self: stretch;
   }
 
   .global-search,

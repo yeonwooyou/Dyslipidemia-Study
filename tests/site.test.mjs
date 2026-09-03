@@ -171,6 +171,28 @@ test("mobile stylesheet protects small screens from layout overflow", async () =
   assert.match(css, /\.statin-price-grid/);
 });
 
+test("header layout prevents navigation and session controls from overlapping", async () => {
+  const pagesCss = await readText("../pages.css");
+  const experienceCss = await readText("../experience.css");
+  const mobileCss = await readText("../mobile.css");
+
+  assert.match(pagesCss, /grid-template-areas:\s*"brand nav actions"/);
+  assert.match(pagesCss, /\.brand\s*\{[^}]*grid-area:\s*brand/s);
+  assert.match(pagesCss, /\.page-nav\s*\{[^}]*grid-area:\s*nav/s);
+  assert.match(pagesCss, /\.page-nav\s*\{[^}]*min-width:\s*0/s);
+  assert.match(pagesCss, /\.page-nav\s*\{[^}]*max-width:\s*100%/s);
+  assert.match(pagesCss, /\.page-nav\s*\{[^}]*overflow-x:\s*auto/s);
+  assert.match(pagesCss, /@media \(max-width:\s*1180px\)[\s\S]*grid-template-areas:\s*"brand actions"\s*"nav nav"/);
+  assert.match(experienceCss, /\.session-actions\s*\{[^}]*grid-area:\s*actions/s);
+  assert.match(experienceCss, /\.session-actions\s*\{[^}]*display:\s*grid/s);
+  assert.match(experienceCss, /\.session-actions\s*\{[^}]*grid-template-columns:\s*minmax\(14rem,\s*20rem\)\s*max-content\s*max-content\s*max-content/s);
+  assert.match(experienceCss, /\.global-search\s*\{[^}]*min-width:\s*0/s);
+  assert.match(experienceCss, /\.global-search-results\[hidden\][\s\S]*display:\s*none\s*!important/);
+  assert.match(experienceCss, /\.section-jump-nav\s*\{[^}]*width:\s*100%/s);
+  assert.match(experienceCss, /\.section-jump-nav\s*\{[^}]*max-width:\s*none/s);
+  assert.match(mobileCss, /\.session-actions\s*\{[^}]*grid-column:\s*1\s*\/\s*-1/s);
+});
+
 test("KSoLA 2024 fact sheet module captures epidemiology and PM interpretation", async () => {
   const factSheet = await loadFactSheetData();
   const ksola = factSheet.getFactSheetById("ksola-2024-dyslipidemia-fact-sheet");

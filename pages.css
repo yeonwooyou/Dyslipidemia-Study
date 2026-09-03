@@ -14,14 +14,16 @@
 
 .app-header {
   display: grid;
-  grid-template-columns: minmax(17rem, max-content) minmax(0, 1fr) max-content;
-  gap: var(--space-4);
+  grid-template-areas: "brand nav actions";
+  grid-template-columns: minmax(14rem, max-content) minmax(0, 1fr) minmax(0, max-content);
+  gap: 0.7rem var(--space-4);
   align-items: center;
   padding: 0.78rem var(--space-8);
   background: color-mix(in oklch, var(--color-surface), transparent 4%);
 }
 
 .brand {
+  grid-area: brand;
   min-width: 0;
 }
 
@@ -35,6 +37,7 @@
 }
 
 .menu-toggle {
+  grid-area: menu;
   display: none;
   min-height: 2.45rem;
   padding: 0 0.86rem;
@@ -46,11 +49,16 @@
 }
 
 .page-nav {
-  justify-self: center;
+  grid-area: nav;
+  justify-self: stretch;
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  min-width: 0;
+  max-width: 100%;
   padding: 0.22rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
   border: 1px solid var(--color-line);
   border-radius: var(--radius);
   background: var(--page-nav-bg);
@@ -58,6 +66,7 @@
 }
 
 .page-nav a {
+  flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   min-height: 2.18rem;
@@ -85,6 +94,8 @@
 .page-status {
   justify-self: end;
   display: grid;
+  grid-column: auto;
+  grid-row: auto;
   min-width: 8.7rem;
   padding: 0.42rem 0.68rem;
   border-left: 1px solid var(--color-line);
@@ -101,6 +112,10 @@
 .page-status strong {
   font-family: var(--font-display);
   font-size: 1.02rem;
+}
+
+.app-header button {
+  box-shadow: 0 0.16rem 0 color-mix(in oklch, var(--color-ink), transparent 72%);
 }
 
 main {
@@ -281,18 +296,18 @@ main {
 
 @media (max-width: 1180px) {
   .app-header {
+    grid-template-areas:
+      "brand actions"
+      "nav nav";
     grid-template-columns: minmax(15rem, 1fr) max-content;
   }
 
   .page-nav {
-    grid-column: 1 / -1;
     justify-self: stretch;
-    overflow-x: auto;
   }
 
   .page-status {
-    grid-column: 2;
-    grid-row: 1;
+    display: none;
   }
 
   .category-map-grid,
@@ -302,10 +317,6 @@ main {
 }
 
 @media (max-width: 920px) {
-  .page-status {
-    display: none;
-  }
-
   .library-controls {
     grid-template-columns: 1fr 1fr;
   }
@@ -321,6 +332,10 @@ main {
 
 @media (max-width: 760px) {
   .app-header {
+    grid-template-areas:
+      "brand menu"
+      "nav nav"
+      "actions actions";
     grid-template-columns: minmax(0, 1fr) max-content;
     align-items: center;
     padding: 0.72rem var(--space-4);
@@ -342,7 +357,6 @@ main {
 
   .page-nav {
     display: none;
-    grid-column: 1 / -1;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-self: stretch;
     gap: 0.35rem;
