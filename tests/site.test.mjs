@@ -83,9 +83,14 @@ const loadStatinProfileData = async () => {
 
 test("site shell uses external assets and CSP without unsafe-inline", async () => {
   const html = await readText("../index.html");
+  const favicon = await readText("../assets/favicon.svg");
 
   assert.match(html, /Content-Security-Policy/);
   assert.doesNotMatch(html, /unsafe-inline/);
+  assert.doesNotMatch(html, /http-equiv="Content-Security-Policy"[\s\S]*frame-ancestors/);
+  assert.match(html, /<link rel="icon" href="assets\/favicon\.svg" type="image\/svg\+xml">/);
+  assert.match(favicon, /<svg/);
+  assert.match(favicon, /Rosuzet/);
   assert.match(html, /<link rel="stylesheet" href="styles\.css">/);
   assert.match(html, /<link rel="stylesheet" href="pages\.css">/);
   assert.match(html, /<link rel="stylesheet" href="auth\.css">/);
@@ -482,17 +487,23 @@ test("deep learning library adds categorized PM study content", async () => {
 test("netlify deployment builds a public static dist with security headers", async () => {
   const packageJson = JSON.parse(await readText("../package.json"));
   const config = await readText("../netlify.toml");
+  const browserSmoke = await readText("../tests/browser-smoke.mjs");
 
-  assert.equal(packageJson.scripts.build, "rm -rf dist && mkdir -p dist/assets && cp index.html *.css *.js dist/ && cp assets/lipid-pathway.svg dist/assets/");
+  assert.equal(packageJson.scripts.build, "rm -rf dist && mkdir -p dist/assets && cp index.html *.css *.js dist/ && cp assets/*.svg dist/assets/");
   assert.match(config, /\[build\]/);
   assert.match(config, /command = "npm test && npm run build"/);
   assert.match(config, /publish = "dist"/);
   assert.match(config, /Content-Security-Policy/);
+  assert.match(config, /frame-ancestors 'none'/);
   assert.match(config, /Strict-Transport-Security/);
   assert.match(config, /X-Content-Type-Options = "nosniff"/);
   assert.match(config, /X-Frame-Options = "DENY"/);
   assert.match(config, /Referrer-Policy/);
   assert.match(config, /Permissions-Policy/);
+  assert.equal(packageJson.scripts["test:browser"], "node tests/browser-smoke.mjs");
+  assert.match(browserSmoke, /global search form submit is prevented/);
+  assert.match(browserSmoke, /source hub shows an empty state/);
+  assert.match(browserSmoke, /viewport layout has no global horizontal overflow or header overlap/);
 });
 
 test("guideline data distinguishes current and upcoming Korean guidance", async () => {

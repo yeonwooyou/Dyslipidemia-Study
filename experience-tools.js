@@ -96,6 +96,13 @@
     if (!input || !data) {
       return;
     }
+    const form = input.closest("form");
+    const root = select("#globalSearchResults");
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const firstResult = root?.querySelector("a");
+      firstResult?.click();
+    });
     input.addEventListener("input", (event) => renderGlobalSearchResults(event.target.value));
     input.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
@@ -203,7 +210,8 @@
       );
       return card;
     });
-    grid.replaceChildren(...cards);
+    const emptyState = element("p", { className: "empty-state", text: "검색 조건에 맞는 출처가 없습니다." });
+    grid.replaceChildren(...(cards.length > 0 ? cards : [emptyState]));
   };
 
   const renderGuidelineSegmentDiff = () => {

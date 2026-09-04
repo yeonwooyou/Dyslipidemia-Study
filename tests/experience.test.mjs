@@ -65,6 +65,9 @@ test("experience shell adds search, source hub, glossary, and responsive control
   assert.match(css, /\.glossary-drawer/);
   assert.match(tools, /localStorage/);
   assert.match(tools, /dataset\.viewMode/);
+  assert.match(tools, /closest\("form"\)/);
+  assert.match(tools, /addEventListener\("submit"/);
+  assert.match(tools, /event\.preventDefault\(\)/);
   assert.match(tools, /sectionJumpNav/);
   assert.match(tools, /lastActiveElement/);
   assert.match(tools, /focusableElements/);
@@ -72,6 +75,7 @@ test("experience shell adds search, source hub, glossary, and responsive control
   assert.match(tools, /renderSourceCategoryFilter/);
   assert.match(tools, /getSourceItemsByFilters/);
   assert.match(tools, /source-archive-status/);
+  assert.match(tools, /검색 조건에 맞는 출처가 없습니다/);
   assert.doesNotMatch(tools, /innerHTML/);
 });
 
