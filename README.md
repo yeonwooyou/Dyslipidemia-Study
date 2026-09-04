@@ -1,7 +1,7 @@
 # Rosuzet PM Learning Pack
 
 작성일: 2026-08-31<br>
-최근 사이트 업데이트: 2026-09-03
+최근 사이트 업데이트: 2026-09-04
 
 이 폴더는 로수젯 PM 관점에서 이상지질혈증, 로수젯, ATC 분류, 임상근거, 시장 구조를 빠르게 학습하기 위한 작업 문서다. 의학적 처방 지침이 아니라 제품/시장/근거 이해를 위한 내부 학습 구조다.
 
@@ -41,7 +41,7 @@
 
 ## 근거 아카이브
 
-[evidence_archive](evidence_archive)는 PDF 원문을 복제하지 않고 공식/JLA/PubMed/PMC/HIRA 기반 링크와 확인 상태만 보관한다. 2026-09-02 기준 원문 확인 목록과 못 찾은 항목은 [source_inventory.md](evidence_archive/source_inventory.md)에 정리했다. 급여가격은 HIRA 최신 약제급여목록 및 급여상한금액표의 적용일이 바뀔 수 있으므로 외부 자료로 쓰기 전 최신 고시 원문 재확인이 필요하다.
+[evidence_archive](evidence_archive)는 PDF 원문을 복제하지 않고 공식/JLA/PubMed/PMC/HIRA 기반 링크와 확인 상태만 보관한다. 2026-09-04 기준 원문 확인 목록과 못 찾은 항목은 [source_inventory.md](evidence_archive/source_inventory.md)에 정리했다. 급여가격은 HIRA 최신 약제급여목록 및 급여상한금액표의 적용일이 바뀔 수 있으므로 외부 자료로 쓰기 전 최신 고시 원문 재확인이 필요하다.
 
 논문 원문을 직접 찾을 때는 [paper_search_list.csv](evidence_archive/paper_search_list.csv)를 먼저 쓴다. 약어를 전체 논문 제목, PMID/DOI/NCT, 우선순위, 찾아야 할 원문 형태로 풀어둬서 Excel에서 바로 필터링할 수 있다.
 

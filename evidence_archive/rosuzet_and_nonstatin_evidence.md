@@ -13,6 +13,8 @@ last checked: 2026-09-02
 | SWITCH | adjacent | PubMed 확인 | stroke 환자 statin monotherapy switch story | 관찰연구. target별 claim 수위 주의 | https://pubmed.ncbi.nlm.nih.gov/41225467/ |
 | ROSETTA-Stroke | strategy/adjacent | PMC 확인 | stroke secondary prevention에서 병용 전략 | 90일 lipid endpoint 중심 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10250871/ |
 | RACING subgroup | strategy | PubMed/PMC 확인 | VHR, elderly, PCI, diabetes segment evidence | subgroup은 interaction, 사전정의 여부, multiplicity 확인 | https://pubmed.ncbi.nlm.nih.gov/37531130/ |
+| ASCVD + T2DM rosuvastatin/ezetimibe trial | strategy | PubMed 확인 | 223명, 24주 LDL-C/ApoB 비교 | non-inferiority와 lipid endpoint를 outcome superiority로 확대 금지 | https://pubmed.ncbi.nlm.nih.gov/40341101/ |
+| T2DM rosuvastatin/ezetimibe meta-analysis | class | PubMed 확인 | 6개 RCT pooled lipid efficacy와 HbA1c 비교 | 이질성·surrogate endpoint·장기 outcome 부재 표시 | https://pubmed.ncbi.nlm.nih.gov/38957250/ |
 
 ## Nonstatin And Residual Risk Watch
 

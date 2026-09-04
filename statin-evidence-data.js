@@ -382,7 +382,7 @@ const StatinEvidence = (() => {
       pmUse: "Asian rosuvastatin plaque data as context, not 로수젯 직접 근거.",
       limitations: "Open-label surrogate study.",
       sourceTier: "B",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=COSMOS+rosuvastatin+coronary+atherosclerosis+Japan"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/22831708/"
     },
     {
       id: "lips",
@@ -416,7 +416,7 @@ const StatinEvidence = (() => {
       pmUse: "treat-to-target implementation과 usual care gap을 설명.",
       limitations: "Open-label single-country study.",
       sourceTier: "B",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=GREACE+atorvastatin+coronary+heart+disease"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/12201623/"
     },
     {
       id: "post-cabg",
@@ -433,7 +433,7 @@ const StatinEvidence = (() => {
       pmUse: "post-revascularization에서 LDL-C lowering intensity의 historical support.",
       limitations: "Graft angiographic endpoint and older surgical era.",
       sourceTier: "B",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=Post-CABG+Trial+lovastatin+graft+atherosclerosis"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/8992351/"
     },
     {
       id: "four-d",
@@ -501,7 +501,7 @@ const StatinEvidence = (() => {
       pmUse: "renal transplant 환자에서 endpoint hierarchy와 subgroup caution 학습.",
       limitations: "Special population and mixed endpoint interpretation.",
       sourceTier: "B",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=ALERT+fluvastatin+renal+transplant+trial"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/12814712/"
     },
     {
       id: "planet-i-ii",
@@ -518,7 +518,7 @@ const StatinEvidence = (() => {
       pmUse: "신기능/단백뇨 환자에서 statin 선택과 허가사항 주의점을 분리.",
       limitations: "Renal surrogate endpoints, not CV outcome trial.",
       sourceTier: "B",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=PLANET+I+PLANET+II+rosuvastatin+atorvastatin+proteinuria"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/30184238/"
     },
     {
       id: "sattar-diabetes-meta",
@@ -586,7 +586,7 @@ const StatinEvidence = (() => {
       pmUse: "statin intolerance 상담에서 nocebo, rechallenge, shared decision을 설명.",
       limitations: "Selected statin-intolerant volunteers and symptom-focused design.",
       sourceTier: "B",
-      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=SAMSON+statin+nocebo+trial"
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/34531021/"
     },
     {
       id: "ctt-safety",

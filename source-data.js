@@ -7,11 +7,10 @@ const SourceData = (() => {
 
   const sourceHubItems = [
     source({
-      archiveState: "local-file",
+      archiveState: "linked-only",
       category: "역학",
       extractionFocus: ["유병률 funnel", "치료율/조절률", "고위험군 규모"],
       id: "ksola-fact-2024",
-      localArchivePath: "evidence_archive/KSoLA Dyslipidemia Fact Sheet 2024 공식 PDF.pdf",
       pmUse: "Fact Sheet 수치와 시장 sizing 가정을 연결한다.",
       priority: "P0",
       sourceUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12488789/",
@@ -20,11 +19,10 @@ const SourceData = (() => {
       title: "Dyslipidemia Fact Sheet 2024 (KSoLA)"
     }),
     source({
-      archiveState: "local-file",
+      archiveState: "linked-only",
       category: "지침",
       extractionFocus: ["위험군 정의", "LDL-C target", "nonstatin add-on 문장"],
       id: "ksola-guideline-2022",
-      localArchivePath: "evidence_archive/KSoLA 이상지질혈증 진료지침 제5판.pdf",
       pmUse: "국내 자료의 1차 backbone으로 둔다.",
       priority: "P0",
       sourceUrl: "https://new.lipid.or.kr/reference/guideline.php?boardid=guideline&category=&idx=1281&mode=view",
@@ -69,11 +67,10 @@ const SourceData = (() => {
       title: "WHO ATC C10BA06 rosuvastatin and ezetimibe"
     }),
     source({
-      archiveState: "local-file",
+      archiveState: "linked-only",
       category: "Trial",
       extractionFocus: ["PICO", "3년 outcome", "LDL-C <70 mg/dL 도달률"],
       id: "racing",
-      localArchivePath: "evidence_archive/Paper/2. Racing.pdf",
       pmUse: "로수젯 10/10 mg 인접 strategy 근거로 사용하되 브랜드 outcome claim은 제한한다.",
       priority: "P0",
       sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/35863366/",
@@ -94,11 +91,10 @@ const SourceData = (() => {
       title: "IMPROVE-IT"
     }),
     source({
-      archiveState: "local-file",
+      archiveState: "linked-only",
       category: "Trial",
       extractionFocus: ["T2DM switch-in", "12주 LDL-C endpoint", "outcome claim 제한"],
       id: "eroica",
-      localArchivePath: "evidence_archive/Paper/1. EROICA.pdf",
       pmUse: "내분비 segment에서 lipid efficacy 근거로 쓰며 outcome claim은 피한다.",
       priority: "P0",
       sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/41190361/",
@@ -107,11 +103,10 @@ const SourceData = (() => {
       title: "EROICA rosuvastatin/ezetimibe FDC"
     }),
     source({
-      archiveState: "local-file",
+      archiveState: "needed",
       category: "가격",
       extractionFocus: ["제품코드", "적용일", "상한금액"],
       id: "hira-2026-price",
-      localArchivePath: "evidence_archive/약제급여목록및급여상한금액표_(2026.9.1.)_공개용(비인가자) 1부.xlsx",
       pmUse: "가격표 외부 사용 전 제품코드, 적용일, 상한금액을 재확인한다.",
       priority: "P0",
       sourceUrl: "https://www.hira.or.kr/",
@@ -120,11 +115,10 @@ const SourceData = (() => {
       title: "HIRA September 2026 약제급여목록"
     }),
     source({
-      archiveState: "local-file",
+      archiveState: "needed",
       category: "허가",
       extractionFocus: ["효능효과", "용법용량", "금기/주의"],
       id: "rosuzet-label-mfds",
-      localArchivePath: "evidence_archive/로수젯 의약품안전나라 허가사항.xlsx",
       pmUse: "제품 소개와 safety guardrail을 허가사항 문장으로 고정한다.",
       priority: "P0",
       sourceUrl: "https://nedrug.mfds.go.kr/",
@@ -133,11 +127,10 @@ const SourceData = (() => {
       title: "로수젯 의약품안전나라 허가사항"
     }),
     source({
-      archiveState: "local-file",
+      archiveState: "needed",
       category: "아카이브",
       extractionFocus: ["공식 PDF 링크", "파일명", "표 번호"],
       id: "ksola-pdf-direct",
-      localArchivePath: "evidence_archive/KSoLA Dyslipidemia Fact Sheet 2024 공식 PDF.pdf",
       pmUse: "PDF 파일명과 표 번호를 로컬 archive index에 매핑한다.",
       priority: "P1",
       sourceUrl: "https://www.lipid.or.kr/",

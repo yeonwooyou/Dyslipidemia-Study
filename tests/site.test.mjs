@@ -205,7 +205,8 @@ test("KSoLA 2024 fact sheet module captures epidemiology and PM interpretation",
 
   assert.equal(ksola.publisher, "KSoLA");
   assert.equal(ksola.factSheetYear, "2024");
-  assert.match(ksola.officialSourceUrl, /ksola\.or\.kr|lipid\.or\.kr/);
+  assert.equal(ksola.evidenceBase, "KNHANES 2007-2022 and NHIS-NSC 2002-2019 analysis");
+  assert.match(ksola.officialSourceUrl, /new\.lipid\.or\.kr\/uploaded\/board\/factsheet/);
   assert.match(ksola.journalSourceUrl, /10\.12997\/jla\.2025\.14\.3\.298|PMC12488789/);
   assert.equal(factSheet.factSheetMetrics.length >= 8, true);
 
@@ -222,6 +223,7 @@ test("KSoLA 2024 fact sheet module captures epidemiology and PM interpretation",
 
   assert.match(factSheet.pmInterpretation.marketSizing, /40\.9%/);
   assert.match(factSheet.pmInterpretation.claimGuardrail, /역학|제품/);
+  assert.equal(factSheet.getFactSheetMetricById("treated-control").value, "재확인 필요");
 });
 
 test("dyslipidemia definition module starts with classification structure", async () => {
@@ -381,7 +383,7 @@ test("paper search CSV expands abbreviations into searchable titles", async () =
   assert.match(csv, /Dyslipidemia Fact Sheet in South Korea, 2024/);
   assert.match(csv, /RACING diabetes subgroup 원논문 탐색/);
   assert.match(csv, /현재 사이트 링크 수정 필요/);
-  assert.match(csv, /"MRS-ROZE".*"local-file","evidence_archive\/Paper\/3\. MRS-ROZE\.pdf"/);
+  assert.match(csv, /"MRS-ROZE".*"linked-only","","full text PDF"/);
   assert.match(csv, /41190361/);
   assert.match(csv, /NCT04700436/);
 });
@@ -611,6 +613,8 @@ test("evidence atlas includes EROICA and broad dyslipidemia landmark evidence", 
   assert.equal(ids.has("switch"), true);
   assert.equal(ids.has("rosetta-stroke"), true);
   assert.equal(ids.has("racing-diabetes"), true);
+  assert.equal(ids.has("racing-t2dm-ascvd"), true);
+  assert.equal(ids.has("t2dm-rosu-eze-meta"), true);
   assert.equal(ids.has("fourier"), true);
   assert.equal(ids.has("clear-outcomes"), true);
   assert.equal(ids.has("reduce-it"), true);
@@ -622,6 +626,23 @@ test("evidence atlas includes EROICA and broad dyslipidemia landmark evidence", 
   assert.match(eroica.limitations, /publication|출처|확인/i);
   assert.match(racingDiabetes.sourceUrl, /RACING\+trial\+diabetes/);
   assert.doesNotMatch(racingDiabetes.sourceUrl, /PMC12428817/);
+
+  const racingT2dm = getEvidenceById("racing-t2dm-ascvd");
+  const t2dmMeta = getEvidenceById("t2dm-rosu-eze-meta");
+  assert.match(racingT2dm.sourceUrl, /40341101/);
+  assert.match(racingT2dm.limitations, /24주|outcome/i);
+  assert.match(t2dmMeta.sourceUrl, /38957250/);
+  assert.match(t2dmMeta.limitations, /meta-analysis|장기/i);
+});
+
+test("EROICA evidence includes balanced glycemic context and an outcome guardrail", async () => {
+  const study = await loadStudyData();
+  const eroica = study.getEvidenceById("eroica");
+
+  assert.match(eroica.result, /HbA1c.*0\.15%p/);
+  assert.match(eroica.result, /공복혈당.*3\.6 mg\/dL/);
+  assert.match(eroica.limitations, /single-arm/);
+  assert.match(eroica.limitations, /outcome claim/);
 });
 
 test("direct study deep dives separate publication grade from claim use", async () => {
@@ -679,6 +700,12 @@ test("statin evidence extension adds broad class trial coverage", async () => {
   assert.match(getEvidenceById("sattar-diabetes-meta").limitations, /diabetes/i);
   assert.match(getEvidenceById("lips").sourceUrl, /12076217/);
   assert.match(getEvidenceById("stomp").sourceUrl, /23183941/);
+  assert.match(getEvidenceById("cosmos").sourceUrl, /22831708/);
+  assert.match(getEvidenceById("greace").sourceUrl, /12201623/);
+  assert.match(getEvidenceById("samson").sourceUrl, /34531021/);
+  assert.match(getEvidenceById("post-cabg").sourceUrl, /8992351/);
+  assert.match(getEvidenceById("alert").sourceUrl, /12814712/);
+  assert.match(getEvidenceById("planet-i-ii").sourceUrl, /30184238/);
   assert.equal(getEvidenceByCategory("statin-intensive-strategy").some((study) => study.id === "prove-it"), true);
 });
 

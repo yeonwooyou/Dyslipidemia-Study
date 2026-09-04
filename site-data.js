@@ -222,8 +222,8 @@ const StudyData = (() => {
       type: "T2DM switch-in direct evidence",
       population: "T2DM + 이상지질혈증, statin 단독에도 LDL-C >=70 mg/dL",
       comparator: "parallel control 없음",
-      result: "로수젯 10/2.5 mg 12주 전환 후 FAS 586명 중 62.3%가 LDL-C <70 mg/dL에 도달했다.",
-      pmUse: "당뇨병 환자에서 10/2.5 mg switch story의 핵심 직접 근거",
+      result: "로수젯 10/2.5 mg 12주 전환 후 FAS 586명 중 62.3%가 LDL-C <70 mg/dL에 도달했다. HbA1c는 0.15%p, 공복혈당은 3.6 mg/dL 증가했다.",
+      pmUse: "당뇨병 환자에서 10/2.5 mg switch story의 핵심 직접 근거. 단기 혈당 변화와 outcome 부재를 함께 설명한다.",
       sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/41190361/"
     },
     {

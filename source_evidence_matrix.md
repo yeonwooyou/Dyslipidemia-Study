@@ -1,6 +1,6 @@
 # Source and Evidence Matrix
 
-작성일: 2026-08-31
+작성일: 2026-09-04
 
 ## 출처 신뢰도 원칙
 
@@ -16,10 +16,10 @@
 | 항목 | 확인 내용 | 출처 | 신뢰도 | PM 활용 |
 |---|---|---|---|---|
 | 성분/용량 | ezetimibe 10 mg + rosuvastatin 2.5/5/10/20 mg | 약학정보원/MFDS 자료 기반 | A- | 제품 기본 프로파일 |
-| 효능효과 | 원발성 고콜레스테롤혈증 또는 혼합형 이상지질혈증에서 total-C, LDL-C, ApoB, TG, non-HDL-C 감소 및 HDL-C 증가 | 약학정보원/MFDS 자료 기반 | A- | label message 범위 |
-| 용법 | 식사와 관계없이 1일 1회 | 약학정보원/MFDS 자료 기반 | A- | 복약 편의성 |
-| 용량 조절 | LDL-C 기저치, 목표치, 반응에 따라 조절. 4주 이상 간격 지질 확인 | 약학정보원/MFDS 자료 기반 | A- | 환자별 용량 전략 |
-| 주요 금기 | 과민반응, 활동성 간질환, 근질환, cyclosporine 병용, 중증 신부전, 임부/수유부 등 | 약학정보원/MFDS 자료 기반 | A- | 안전성 교육 |
+| 효능효과 | 원발성 고콜레스테롤혈증 또는 혼합형 이상지질혈증에서 total-C, LDL-C, ApoB, TG, non-HDL-C 감소 및 HDL-C 증가 | MFDS 품목별 허가사항 직접 대조 필요 | 확인 대기 | label message 범위 |
+| 용법 | 식사와 관계없이 1일 1회 | MFDS 품목별 허가사항 직접 대조 필요 | 확인 대기 | 복약 편의성 |
+| 용량 조절 | LDL-C 기저치, 목표치, 반응에 따라 조절. 4주 이상 간격 지질 확인 | MFDS 품목별 허가사항 직접 대조 필요 | 확인 대기 | 환자별 용량 전략 |
+| 주요 금기 | 과민반응, 활동성 간질환, 근질환, cyclosporine 병용, 중증 신부전, 임부/수유부 등 | MFDS 품목별 허가사항 직접 대조 필요 | 확인 대기 | 안전성 교육 |
 
 ## ATC/분류
 
@@ -46,7 +46,7 @@
 | Low-dose R2.5+E10 | 한국 15개 기관, 279명 무작위 배정, 8주 | E10, R2.5, R5 단독 | `R2.5+E10` LDL-C -45.7%, R5 -38.9%. low/moderate risk target achievement 높음 | `10/2.5` positioning | outcome trial 아님 |
 | RACING | 한국 26개 기관, ASCVD 3,780명, 3년, open-label non-inferiority | rosuvastatin 20 mg 단독 | `R10+E10`이 3년 composite outcome에서 비열등. LDL-C <70 mg/dL 도달률과 intolerance 지표 우수 | `10/10` secondary prevention 전략 | open-label, Hanmi funding, 한국 ASCVD population |
 | IMPROVE-IT | ACS 이후 환자 대상 outcome trial | simvastatin 단독 | ezetimibe 추가가 LDL-C를 더 낮추고 cardiovascular outcome을 개선 | ezetimibe 추가의 class-level outcome 근거 | rosuvastatin/ezetimibe 직접 근거는 아님 |
-| EROICA | 한국 다기관 전향적 open-label single-arm, T2DM+이상지질혈증, statin 단독에도 LDL-C >=70 mg/dL | parallel control 없음 | FAS 586명에서 12주 LDL-C <70 mg/dL 달성률 62.3%, LDL-C 26.0% 감소, adherence 97.5% | `10/2.5` T2DM switch story의 핵심 직접 근거 | 12주, single-arm, outcome claim 확대 금지 |
+| EROICA | 한국 다기관 전향적 open-label single-arm, T2DM+이상지질혈증, statin 단독에도 LDL-C >=70 mg/dL | parallel control 없음 | FAS 586명에서 12주 LDL-C <70 mg/dL 달성률 62.3%, LDL-C 26.0% 감소, adherence 97.5%. HbA1c 0.15%p 및 공복혈당 3.6 mg/dL 증가 | `10/2.5` T2DM switch story의 핵심 직접 근거 | 12주, single-arm, 혈당 변화와 outcome 부재를 함께 설명. outcome claim 확대 금지 |
 | REMBRANDT | ClinicalTrials.gov 등록 기준 T2DM+복합형 이상지질혈증 146명, open-label active-controlled 4상 | rosuvastatin 10 mg | `10/5` 전환 시 LDL-C 및 lipid profile 개선 발표 | endocrinology/T2DM+TG story 후보 | 등록정보에는 posted results 없음. peer-reviewed publication 추적 필요 |
 | EASY-ROSUZET | 회사 발표 기준 real-world 연구 | 기존 치료/초치료 환자 | 저위험군 83%, 중등도 위험군 74% LDL-C 목표 도달률 발표 | 실제 진료 활용성 | 원 논문/등록정보 확인 필요 |
 | SWITCH | 한국 다기관 전향적 관찰연구, stroke 환자, statin 단독에도 LDL-C >=70 mg/dL | 전환 전 statin monotherapy baseline | follow-up 994명 중 6개월 LDL-C <70 mg/dL 달성률 71.2% | neurology/stroke segment switch-in story | 관찰연구. <55 mg/dL target 또는 50% 감소 동시 달성 claim은 별도 확인 |

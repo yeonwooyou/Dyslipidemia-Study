@@ -95,14 +95,14 @@ test("metadata and source hub data are centralized for screen and archive use", 
   const experience = context.globalThis.ExperienceData;
   const readme = await readText("../README.md");
 
-  assert.equal(metadata.contentLastChecked, "2026-09-02");
-  assert.equal(metadata.siteUpdatedAt, "2026-09-03");
+  assert.equal(metadata.contentLastChecked, "2026-09-04");
+  assert.equal(metadata.siteUpdatedAt, "2026-09-04");
   assert.equal(metadata.pageCount, 7);
   assert.equal(experience.sourceHubItems, sourceData.sourceHubItems);
   assert.equal(sourceData.getSourceItemsByStatus("follow-up").some((item) => item.title.includes("HIRA")), true);
   assert.equal(sourceData.getSourceItemById("ksola-fact-2024").status, "found");
-  assert.equal(sourceData.getSourceItemById("ksola-fact-2024").archiveState, "local-file");
-  assert.match(sourceData.getSourceItemById("ksola-fact-2024").localArchivePath, /evidence_archive/);
+  assert.equal(sourceData.getSourceItemById("ksola-fact-2024").archiveState, "linked-only");
+  assert.equal(sourceData.getSourceItemById("ksola-fact-2024").localArchivePath, "");
   assert.equal(Array.isArray(sourceData.getSourceItemById("ksola-fact-2024").extractionFocus), true);
   assert.match(sourceData.getSourceItemById("eroica").sourceUrl, /41190361/);
   assert.equal(sourceData.sourceCategoryOptions.some((item) => item.id === "Trial"), true);

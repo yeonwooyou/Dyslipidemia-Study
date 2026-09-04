@@ -23,9 +23,9 @@ const StudyEvidence = (() => {
       intervention: "Rosuzet 10/2.5 mg once daily for 12 weeks",
       comparator: "No parallel control",
       endpoint: "LDL-C <70 mg/dL at Week 12",
-      result: "FAS 586명에서 62.3%가 LDL-C <70 mg/dL 달성, LDL-C 26.0% 감소, adherence 97.5%.",
+      result: "FAS 586명에서 62.3%가 LDL-C <70 mg/dL 달성, LDL-C 26.0% 감소, adherence 97.5%. HbA1c는 0.15%p, 공복혈당은 3.6 mg/dL 증가했다.",
       pmUse: "T2DM 환자에서 10/2.5 mg switch story의 핵심 직접 근거.",
-      limitations: "Peer-reviewed publication은 확인됐지만 single-arm, open-label, 12주 연구라 장기 outcome claim으로 확대 금지.",
+      limitations: "Peer-reviewed publication은 확인됐지만 single-arm, open-label, 12주 연구다. 혈당 변화와 장기 outcome 부재를 함께 고려하며 cardiovascular outcome claim으로 확대 금지.",
       sourceTier: "A",
       sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/41190361/"
     },
@@ -200,6 +200,23 @@ const StudyEvidence = (() => {
       sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=RACING+trial+diabetes+ezetimibe+rosuvastatin+atherosclerotic+cardiovascular+disease"
     },
     {
+      id: "racing-t2dm-ascvd",
+      title: "Rosuvastatin/ezetimibe in ASCVD with T2DM",
+      year: "2025",
+      category: "rosuvastatin-ezetimibe",
+      productRelevance: "strategy",
+      design: "Multicentre randomized non-inferiority trial",
+      population: "ASCVD with T2DM, 223 patients",
+      intervention: "Rosuvastatin 10 mg + ezetimibe 10 mg once daily",
+      comparator: "Rosuvastatin 20 mg once daily",
+      endpoint: "LDL-C percent change at Week 24 and ApoB",
+      result: "At Week 24, the combination was non-inferior for LDL-C lowering and produced a greater ApoB reduction than rosuvastatin 20 mg.",
+      pmUse: "T2DM + established ASCVD에서 10/10 mg 전략을 설명하는 추가 근거.",
+      limitations: "24주 lipid/ApoB endpoint 연구이며 cardiovascular outcome trial이 아니다. 비열등성을 우월성으로 확대하지 않는다.",
+      sourceTier: "A",
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/40341101/"
+    },
+    {
       id: "i-rosette",
       title: "I-ROSETTE",
       year: "2018",
@@ -232,6 +249,23 @@ const StudyEvidence = (() => {
       limitations: "Open-label, lipid/metabolic endpoints.",
       sourceTier: "A",
       sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/38043782/"
+    },
+    {
+      id: "t2dm-rosu-eze-meta",
+      title: "Rosuvastatin plus ezetimibe in T2DM meta-analysis",
+      year: "2024",
+      category: "rosuvastatin-ezetimibe",
+      productRelevance: "class",
+      design: "Systematic review and meta-analysis of randomized controlled trials",
+      population: "Adults with T2DM across six randomized trials",
+      intervention: "Rosuvastatin plus ezetimibe",
+      comparator: "Rosuvastatin monotherapy",
+      endpoint: "LDL-C, total cholesterol, triglycerides, and HbA1c",
+      result: "Combination therapy produced greater lipid reductions, while rosuvastatin monotherapy showed a greater HbA1c reduction in the pooled analysis.",
+      pmUse: "T2DM에서 lipid efficacy와 glycemic signal을 분리해 설명하는 종합 근거.",
+      limitations: "Study-level heterogeneity와 surrogate endpoints의 한계가 있으며 장기 cardiovascular outcome을 증명하지 않는다.",
+      sourceTier: "A",
+      sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/38957250/"
     },
     {
       id: "dm-inflammation",
